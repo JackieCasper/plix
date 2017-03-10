@@ -38,7 +38,10 @@ controller.findById = (req, res) => {
 
 
 controller.getGeoIp = (req, res) => {
-  res.json(Locations.getGeoIp(req.ip));
+  res.json({
+    location: Locations.getGeoIp(req.ip),
+    ip: req.ip
+  });
 }
 
 module.exports = controller;
