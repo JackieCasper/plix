@@ -25,5 +25,5 @@ CREATE TABLE plix (
   img VARCHAR NOT NULL,
   thumb VARCHAR,
   description VARCHAR(255) NOT NULL,
-  plix_date DATETIME NOT NULL DEFAULT NOW()
+  plix_date TIMESTAMP NOT NULL DEFAULT NOW()
 );

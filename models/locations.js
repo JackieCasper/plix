@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
-const geoip = require('geoip-lite');
+//const geoip = require('geoip-lite');
 
 const Location = {};
 
-Location.getGeoIp = (ip) => geoip.lookup(ip);
+//Location.getGeoIp = (ip) => geoip.lookup(ip);
 
 Location.create = (name, placeId, address, lat, lng) => {
   return db.one('INSERT INTO locations (name, place_id, address, lat, lng) VALUES ($1, $2, $3, $4, $5) RETURNING id', [name, placeId, address, lat, lng]);
