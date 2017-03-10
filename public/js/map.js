@@ -138,7 +138,7 @@ map.init = (location) => {
       lat: 40.739838299999995,
       lng: -73.9895757
     },
-    zoom: 12
+    zoom: 18
   };
   location = location || defaultLocation;
 
