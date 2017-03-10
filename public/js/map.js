@@ -135,10 +135,10 @@ map.init = (location) => {
 ];
   const defaultLocation = {
     center: {
-      lat: -34.397,
-      lng: 150.644
+      lat: 40.739838299999995,
+      lng: -73.9895757
     },
-    zoom: 8
+    zoom: 12
   };
   location = location || defaultLocation;
 
