@@ -138,13 +138,13 @@ map.init = (location) => {
       lat: 40.739838299999995,
       lng: -73.9895757
     },
-    zoom: 15
+    zoom: 16
   };
 
 
   const mapOptions = {
     center: location.center,
-    zoom: location.zoom,
+    zoom: location.zoom || 16,
     styles: styles,
     zoomControl: true,
     mapTypeControl: false
@@ -159,6 +159,7 @@ map.init = (location) => {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
+
       map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     });
   } else {
