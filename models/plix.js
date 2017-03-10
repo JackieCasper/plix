@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 
 const db = require('../config/db');
 const aws = require('aws-sdk');
-const S3_BUCKET = require('../config/keys').s3Bucket || process.env.S3_BUCKET;
+
 
 const Plix = {};
 
