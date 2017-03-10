@@ -1,0 +1,28 @@
+{
+  "name": "turtle-project-2",
+  "version": "1.0.0",
+  "description": "![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) # Project #2: Building Your First Full-stack Application",
+  "main": "app.js",
+  "dependencies": {
+    "aws-sdk": "^2.26.0",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.1",
+    "mustache-express": "^1.2.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pg-promise": "^5.6.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.generalassemb.ly:JackieCasper/turtle-project-2.git"
+  },
+  "author": "Jackie Casper",
+  "license": "ISC"
+}
