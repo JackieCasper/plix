@@ -143,8 +143,7 @@ map.init = (location) => {
 
 
   const mapOptions = {
-    center: location.center || defaultLocation.center,
-    zoom: location.zoom || 16,
+    zoom: 16,
     styles: styles,
     zoomControl: true,
     mapTypeControl: false
@@ -164,6 +163,8 @@ map.init = (location) => {
     });
   } else {
     location = location || defaultLocation;
+    mapOptions.center = location.center;
+    mapOptions.zoom = location.zoom;
     map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
   }
 };
