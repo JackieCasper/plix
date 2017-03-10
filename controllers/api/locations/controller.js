@@ -38,7 +38,7 @@ controller.findById = (req, res) => {
 
 
 controller.getGeoIp = (req, res) => {
-  const ip = req.ip.split(':');
+  let ip = req.ip.split(':');
   ip = ip[ip.length - 1];
   res.json({
     location: Locations.getGeoIp(ip),
