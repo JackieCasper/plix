@@ -9,6 +9,7 @@ geoLocation.get = (key) => {
     },
     error: err => console.log(err)
   });
+  geoLocation.backup();
 };
 
 // GeoIP - lite https://github.com/bluesmoon/node-geoip
@@ -17,7 +18,7 @@ geoLocation.backup = () => {
     url: '/api/locations/geolocation',
     type: 'GET',
     success: data => {
-
+      console.log(data);
     },
     error: err => console.log(err)
   })
