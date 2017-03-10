@@ -46,6 +46,7 @@ autocomplete.getPlaceData = (placeId, key, $container, last = false) => {
     type: 'GET',
     success: data => {
       console.log(data);
+      $container.html(data.result.adr_address);
     },
     error: err => {
       console.log(err);
