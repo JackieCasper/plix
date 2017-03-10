@@ -143,7 +143,7 @@ map.init = (location) => {
 
 
   const mapOptions = {
-    center: location.center,
+    center: location.center || defaultLocation.center,
     zoom: location.zoom || 16,
     styles: styles,
     zoomControl: true,
