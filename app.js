@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const cookieParser = require('cookie-parser');
+require('geoip-lite/scripts/updatedb.js');
 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
