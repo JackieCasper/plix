@@ -19,9 +19,10 @@ autocomplete.getResults = (input, key) => {
     predictions.forEach((prediction, i) => {
       const $placeContainer = $('<div>')
         .appendTo($results);
-      autocomplete.getPlaceData(prediction.place_id,
-        key,
+      autocomplete.getPlaceData(key,
         $placeContainer,
+        prediction.place_id,
+        prediction.description,
         i === predictions.length - 1 ? true : false);
     });
   }
@@ -40,7 +41,7 @@ autocomplete.renderResult = (place) => {
 // set autocomplete result -- as geolocation
 autocomplete.setResult = (location) => {};
 
-autocomplete.getPlaceData = (placeId, key, $container, last = false) => {
+autocomplete.getPlaceData = (key, $container, placeId, description, last = false) => {
   $.ajax({
     url: `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${key}`,
     type: 'GET',

@@ -141,6 +141,17 @@ map.init = (location) => {
     zoom: 8
   };
   location = location || defaultLocation;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      location.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+    });
+  }
+
+
+
   const mapOptions = {
     center: location.center,
     zoom: location.zoom,
