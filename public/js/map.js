@@ -140,7 +140,7 @@ map.init = (location) => {
     },
     zoom: 15
   };
-  location = location || defaultLocation;
+
 
   const mapOptions = {
     center: location.center,
@@ -162,6 +162,7 @@ map.init = (location) => {
       map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     });
   } else {
+    location = location || defaultLocation;
     map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
   }
 };
