@@ -155,7 +155,7 @@ const getAutoComplete = () => {};
 
 const getGeoLocation = () => {
   $.ajax({
-    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAbRXW_Cvax61VTSO3pZNuD82H3C9ct0mQ'
+    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key='
   })
 };
 
