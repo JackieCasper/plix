@@ -138,12 +138,9 @@ map.init = (location) => {
       lat: 40.739838299999995,
       lng: -73.9895757
     },
-    zoom: 18
+    zoom: 15
   };
   location = location || defaultLocation;
-
-
-
 
   const mapOptions = {
     center: location.center,
@@ -152,18 +149,20 @@ map.init = (location) => {
     zoomControl: true,
     mapTypeControl: false
   }
-  map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-  if (navigator.geolocation) {
+
+  if (navigator.geolocation && !location) {
     console.log('LOCATON');
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log(position);
-      const pos = {
+      mapOptions.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      map.map.setCenter(pos);
+      map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     });
+  } else {
+    map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
   }
 };
 
