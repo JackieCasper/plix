@@ -142,7 +142,9 @@ map.init = (location) => {
   };
   location = location || defaultLocation;
   if (navigator.geolocation) {
+    console.log('LOCATON');
     navigator.geolocation.getCurrentPosition(function (position) {
+      console.log(position);
       location.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
