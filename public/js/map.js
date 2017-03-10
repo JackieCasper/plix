@@ -141,16 +141,7 @@ map.init = (location) => {
     zoom: 8
   };
   location = location || defaultLocation;
-  if (navigator.geolocation) {
-    console.log('LOCATON');
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log(position);
-      location.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-    });
-  }
+
 
 
 
@@ -162,6 +153,18 @@ map.init = (location) => {
     mapTypeControl: false
   }
   map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  if (navigator.geolocation) {
+    console.log('LOCATON');
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log(position);
+      const pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      map.map.setCenter(pos);
+    });
+  }
 };
 
 // center the map on a given point
