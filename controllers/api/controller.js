@@ -1,5 +1,5 @@
 const controller = {};
-const keys = require('../../config/keys') || {
+const keys = {
   geoLocationKey: process.env.GEO_LOCATION_KEY,
   placesKey: process.env.PLACES_KEY
 };
