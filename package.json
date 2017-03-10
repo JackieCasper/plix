@@ -15,14 +15,18 @@
     "passport-local": "^1.0.0",
     "pg-promise": "^5.6.3"
   },
+  "engines": {
+    "node": "7.0.0"
+  },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
   },
   "repository": {
     "type": "git",
-    "url": "git@git.generalassemb.ly:JackieCasper/turtle-project-2.git"
+    "url": "git@git.generalassemb.ly:JackieCasper/turtle-project-2.git",
   },
   "author": "Jackie Casper",
-  "license": "ISC"
+  "license": "ISC",
 }

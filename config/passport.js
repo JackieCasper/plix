@@ -89,10 +89,10 @@ Passport.init = () => {
   passport.use(
     'local-login',
     new LocalStrategy({
-      usernameField: 'user[email]',
+      usernameField: 'user[name]',
       passwordField: 'user[password]',
       passReqToCallback: true
-    }, (req, email, password, done) => {
+    }, (req, name, password, done) => {
       User
         .findByEmail(email)
         .then((user) => {

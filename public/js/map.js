@@ -134,8 +134,11 @@ map.init = (location) => {
     }
 ];
   const defaultLocation = {
-    center: {},
-    zoom: '',
+    center: {
+      lat: -34.397,
+      lng: 150.644
+    },
+    zoom: 8
   };
   location = location || defaultLocation;
   const mapOptions = {
@@ -145,6 +148,7 @@ map.init = (location) => {
     zoomControl: true,
     mapTypeControl: false
   }
+  map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 };
 
 // center the map on a given point

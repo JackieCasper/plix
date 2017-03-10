@@ -2,12 +2,12 @@ const geoLocation = {};
 
 geoLocation.get = (key) => {
   $.ajax({
-    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + keys.geoLocationKey,
-    type: 'GET',
+    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + key,
+    method: 'GET',
     success: data => {
       placeMarker(data.location);
     },
-    error: err => console.log(err);
+    error: err => console.log(err)
   });
 };
 
@@ -19,6 +19,6 @@ geoLocation.backup = () => {
     success: data => {
 
     },
-    error: err => console.log(err);
+    error: err => console.log(err)
   })
 };

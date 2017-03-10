@@ -1,12 +1,12 @@
 // set up router
 const router = require('express').Router();
-const keys = require('../../config/keys');
+const controller = require('./controller');
+
+
 
 router.use('/users/', require('./users/'));
 router.use('/locations/', require('./locations/'));
 router.use('/plix/', require('./plix/'));
-router.get('/keys', (req, res) => {
-  res.json(keys);
-});
+router.get('/keys', controller.getKeys);
 
 module.exports = router;

@@ -4,9 +4,13 @@ const AuthService = require('../../services/auth');
 // set up the controller
 const controller = {};
 
+const keys = require('../../config/keys');
 
-controller.renderLocationSearch = AuthService.redirect, (req, res) => {
-  res.render('/location/index');
+
+controller.renderLocationSearch = (req, res) => {
+  res.render('location/index', {
+    placesKey: keys.placesKey
+  });
 };
 
 

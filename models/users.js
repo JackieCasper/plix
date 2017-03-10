@@ -8,7 +8,12 @@ User.findByEmail = (email) => {
 
 }
 
-User.findByName = (name) => {
+
+User.nameExists = (name) => {
+
+}
+
+User.emailExists = (email) => {
 
 }
 

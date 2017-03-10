@@ -4,7 +4,7 @@ const AuthService = require('../../services/auth');
 // set up the controller
 const controller = {};
 
-controller.show = AuthService.redirect, (req, res) => {
+controller.show = (req, res) => {
   const id = req.params.id;
   Plix
     .findById(id)
