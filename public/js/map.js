@@ -1,139 +1,143 @@
-const defaultLocation = {
-  center: {},
-  zoom: '',
-};
-const styles = [
-  {
-    "featureType": "administrative",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#444444"
+const map = {};
+
+// init the map
+map.init = (location) => {
+  const styles = [
+    {
+      "featureType": "administrative",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#444444"
             }
         ]
     },
-  {
-    "featureType": "landscape",
-    "elementType": "all",
-    "stylers": [
-      {
-        "color": "#f2f2f2"
+    {
+      "featureType": "landscape",
+      "elementType": "all",
+      "stylers": [
+        {
+          "color": "#f2f2f2"
             }
         ]
     },
-  {
-    "featureType": "landscape",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "hue": "#00ffd6"
+    {
+      "featureType": "landscape",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "hue": "#00ffd6"
             },
-      {
-        "saturation": "11"
+        {
+          "saturation": "11"
             },
-      {
-        "weight": "1.00"
+        {
+          "weight": "1.00"
             },
-      {
-        "lightness": "-4"
+        {
+          "lightness": "-4"
             }
         ]
     },
-  {
-    "featureType": "landscape.man_made",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "lightness": "0"
+    {
+      "featureType": "landscape.man_made",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "lightness": "0"
             }
         ]
     },
-  {
-    "featureType": "poi",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "off"
+    {
+      "featureType": "poi",
+      "elementType": "all",
+      "stylers": [
+        {
+          "visibility": "off"
             }
         ]
     },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "visibility": "on"
+    {
+      "featureType": "poi.park",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "visibility": "on"
             },
-      {
-        "hue": "#00ffb2"
+        {
+          "hue": "#00ffb2"
             }
         ]
     },
-  {
-    "featureType": "road",
-    "elementType": "all",
-    "stylers": [
-      {
-        "saturation": -100
+    {
+      "featureType": "road",
+      "elementType": "all",
+      "stylers": [
+        {
+          "saturation": -100
             },
-      {
-        "lightness": 45
+        {
+          "lightness": 45
             }
         ]
     },
-  {
-    "featureType": "road.highway",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "simplified"
+    {
+      "featureType": "road.highway",
+      "elementType": "all",
+      "stylers": [
+        {
+          "visibility": "simplified"
             }
         ]
     },
-  {
-    "featureType": "road.arterial",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
+    {
+      "featureType": "road.arterial",
+      "elementType": "labels.icon",
+      "stylers": [
+        {
+          "visibility": "off"
             }
         ]
     },
-  {
-    "featureType": "transit",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "off"
+    {
+      "featureType": "transit",
+      "elementType": "all",
+      "stylers": [
+        {
+          "visibility": "off"
             }
         ]
     },
-  {
-    "featureType": "water",
-    "elementType": "all",
-    "stylers": [
-      {
-        "color": "#54babe"
+    {
+      "featureType": "water",
+      "elementType": "all",
+      "stylers": [
+        {
+          "color": "#54babe"
             },
-      {
-        "visibility": "on"
+        {
+          "visibility": "on"
             }
         ]
     },
-  {
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "saturation": "-19"
+    {
+      "featureType": "water",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "saturation": "-19"
             },
-      {
-        "lightness": "12"
+        {
+          "lightness": "12"
             }
         ]
     }
-]
-const initMap = (location = defaultLocation) => {
+];
+  const defaultLocation = {
+    center: {},
+    zoom: '',
+  };
+  location = location || defaultLocation;
   const mapOptions = {
     center: location.center,
     zoom: location.zoom,
@@ -143,21 +147,11 @@ const initMap = (location = defaultLocation) => {
   }
 };
 
-const centerMap = (location) => {};
+// center the map on a given point
+map.center = (location) => {};
 
-const placeMarker = (location, marker) => {};
+// place a map marker
+map.placeMarker = (location) => {};
 
-const clearMarkers = () => {};
-
-const initAutoComplete = () => {};
-
-const getAutoComplete = () => {};
-
-const getGeoLocation = () => {
-  $.ajax({
-    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key='
-  })
-};
-
-// GeoIP - lite https://github.com/bluesmoon/node-geoip
-const geoBackup = () => {};
+// clear map markers
+map.clearMarkers = () => {};
