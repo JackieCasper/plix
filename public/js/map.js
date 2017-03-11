@@ -162,7 +162,7 @@ map.init = (key, location) => {
       map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
       map.getPlace(key, mapOptions.center);
-      map.search.init();
+      map.search.init(key);
 
     });
   } else {
@@ -171,7 +171,7 @@ map.init = (key, location) => {
     mapOptions.zoom = location.zoom;
     map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
     map.getPlace(key, mapOptions.center);
-    map.search.init();
+    map.search.init(key);
   }
 };
 
