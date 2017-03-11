@@ -160,14 +160,23 @@ map.init = (location) => {
       };
 
       map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      initAutocomlete();
     });
   } else {
     location = location || defaultLocation;
     mapOptions.center = location.center;
     mapOptions.zoom = location.zoom;
     map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    initAutocomlete();
   }
 };
+
+const initAutocomlete = () => {
+  autocomplete.searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {
+    bounds: map.map.getBounds()
+  });
+}
+
 
 // center the map on a given point
 map.center = (location) => {};
