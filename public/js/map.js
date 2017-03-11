@@ -1,7 +1,8 @@
 const map = {};
+let autocomplete = {};
 
 // init the map
-map.init = (location) => {
+map.init = (key, location) => {
   const styles = [
     {
       "featureType": "administrative",
@@ -158,31 +159,61 @@ map.init = (location) => {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-
       map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      initAutocomlete();
+
+      map.getPlace(key, mapOptions.center);
+      map.search.init();
+
     });
   } else {
     location = location || defaultLocation;
     mapOptions.center = location.center;
     mapOptions.zoom = location.zoom;
     map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    initAutocomlete();
+    map.getPlace(key, mapOptions.center);
+    map.search.init();
   }
 };
 
-const initAutocomlete = () => {
-  autocomplete.searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'), {
-    bounds: map.map.getBounds()
+map.getPlace = (key, location) => {
+  $.ajax({
+    url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`,
+    type: 'GET',
+    success: (data) => {
+      map.addMarker(data.results[0].geometry.location);
+      map.currentPlace = data.results[0];
+    },
+    error: err => console.log(err)
+  })
+}
+
+map.search = {};
+map.search.init = (key) => {
+  map.search.$searchInput = $('#search')
+    .change(() => {
+      if (map.search.$searchInput.val()) {
+        map.search.findPlaces(key);
+      }
+    });
+}
+map.search.findPlaces = (key) => {
+  const searchTerm = map.search.$searchInput.val();
+  $.ajax({
+    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${map.map.getCenter().lat},${map.map.getCenter().lng}&rankby=distance&type=restaurant&keyword=${searchTerm}&key=${key}`,
+    type: 'GET',
+    success: data => {
+      console.log(data);
+    },
+    error: err => {
+      console.log(err);
+    }
   });
 }
 
 
-// center the map on a given point
-map.center = (location) => {};
-
-// place a map marker
-map.placeMarker = (location) => {};
-
-// clear map markers
-map.clearMarkers = () => {};
+map.addMarker = (location) => {
+  map.map.setCenter({
+    lat: location.lat,
+    lng: location.lng
+  });
+}

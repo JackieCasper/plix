@@ -15,17 +15,10 @@ $(() => {
   getKeys();
 
   const initPage = () => {
-    if (geoLocation) {
-      geoLocation.get(keys.geoLocationKey);
-    }
     if (map) {
-      map.init();
-    }
-    if (autocomplete) {
-      autocomplete.init(keys.placesKey);
+      map.init(keys.placesKey);
     }
   }
-
 
 
 })
