@@ -178,7 +178,7 @@ map.init = (key, location) => {
 map.getPlace = (key, location) => {
   $.ajax({
     url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`,
-    type: 'GET',
+    method: 'GET',
     success: (data) => {
       map.addMarker(data.results[0].geometry.location);
       map.currentPlace = data.results[0];
