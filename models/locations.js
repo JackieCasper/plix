@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
 const geoip = require('geoip-lite');
+const fetch = require('node-fetch');
 
+const placesKey = process.env.PLACES_KEY;
 const Location = {};
 
 Location.getGeoIp = (ip) => geoip.lookup(ip);
@@ -72,6 +74,10 @@ Location.findNearbyPlix = (id, distance) => {
           console.log(err)
         });
     })
+}
+
+Location.fetchPlacesByKeyword = (lat, lng, keyword) => {
+  return fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=distance&keyword=${keyword}&key=${placesKey}`);
 }
 
 module.exports = Location;

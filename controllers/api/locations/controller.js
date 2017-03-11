@@ -36,6 +36,26 @@ controller.findById = (req, res) => {
 
 }
 
+controller.fetchPlaceByKeyword = (req, res) => {
+  const fetchData = {
+    lat: req.body.lat,
+    lng: req.body.lng,
+    keyword: req.body.keyword
+  }
+  console.log(fetchData);
+  Locations
+    .fetchPlacesByKeyword(fetchData.lat, fetchData.lng, fetchData.keyword)
+    .then(data => {
+      return data.json();
+    })
+    .then(jsonData => {
+      res.json(jsonData);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+
 
 controller.getGeoIp = (req, res) => {
   let ip = req.ip.split(':');

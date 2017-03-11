@@ -152,9 +152,9 @@ map.init = (key, location) => {
 
 
   if (navigator.geolocation && !location) {
-    console.log('LOCATON');
+
     navigator.geolocation.getCurrentPosition(function (position) {
-      console.log(position);
+
       mapOptions.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -175,13 +175,16 @@ map.init = (key, location) => {
   }
 };
 
-map.getPlace = (key, location) => {
+map.getPlace = (key, location, placeId) => {
+  const url = placeId ? `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${key}` : `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`;
   $.ajax({
-    url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`,
+    url: url,
     method: 'GET',
     success: (data) => {
-      map.addMarker(data.results[0].geometry.location);
+      map.clearMarkers();
+      map.setLocation(data.results[0].geometry.location);
       map.currentPlace = data.results[0];
+      console.log(map.currentPlace);
     },
     error: err => console.log(err)
   })
@@ -190,7 +193,7 @@ map.getPlace = (key, location) => {
 map.search = {};
 map.search.init = (key) => {
   map.search.$searchInput = $('#search')
-    .change(() => {
+    .keyup(() => {
       if (map.search.$searchInput.val()) {
         map.search.findPlaces(key);
       }
@@ -199,10 +202,16 @@ map.search.init = (key) => {
 map.search.findPlaces = (key) => {
   const searchTerm = map.search.$searchInput.val();
   $.ajax({
-    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${map.map.getCenter().lat},${map.map.getCenter().lng}&rankby=distance&type=restaurant&keyword=${searchTerm}&key=${key}`,
-    type: 'GET',
+    url: `/api/locations/places/keyword`,
+    type: 'POST',
+    data: {
+      lat: map.map.getCenter().lat,
+      lng: map.map.getCenter().lng,
+      keyword: searchTerm
+    },
     success: data => {
       console.log(data);
+      map.search.renderPlaceOptions(data.results.slice(0, 5), key);
     },
     error: err => {
       console.log(err);
@@ -210,10 +219,59 @@ map.search.findPlaces = (key) => {
   });
 }
 
+map.markers = [];
 
-map.addMarker = (location) => {
+
+map.search.renderPlaceOptions = (places, key) => {
+  const $results = $('.results').empty();
+  places.forEach(place => {
+    const $placeContainer = $('<div>', {
+        class: 'place-option'
+      })
+      .appendTo($results)
+      .click(() => {
+        map.getPlace(key, place.geometry.location, place.place_id);
+        $('.results').empty();
+      });
+    const $placeIcon = $('<img>', {
+        src: '/img/marker.svg',
+        class: 'place-option-icon'
+      })
+      .appendTo($placeContainer);
+    const $placeText = $('<p>', {
+        class: 'place-option-text'
+      })
+      .appendTo($placeContainer);
+    const $placeName = $('<span>', {
+        class: 'place-option-name'
+      })
+      .text(place.name)
+      .appendTo($placeText);
+    const $placeAdress = $('<span>', {
+        class: 'place-option-address'
+      })
+      .text(place.vicinity)
+      .appendTo($placeText);
+  });
+}
+
+map.clearMarkers = () => {
+  map.markers.forEach(function (marker) {
+    marker.setMap(null);
+  });
+  map.markers = [];
+}
+
+map.setLocation = (location, name) => {
+  map.currentPlace
   map.map.setCenter({
     lat: location.lat,
     lng: location.lng
   });
+
+  map.markers.push(new google.maps.Marker({
+    map: map.map,
+    title: name,
+    position: location
+  }));
 }
