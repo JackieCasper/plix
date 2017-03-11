@@ -15,9 +15,12 @@ $(() => {
   getKeys();
 
   const initPage = () => {
-    if (map) {
+    if (typeof map != 'undefined') {
       map.init(keys.placesKey);
     }
+  }
+  if (typeof Nav != 'undefined') {
+    Nav.init();
   }
 
 

@@ -5,27 +5,28 @@ const AuthService = require('../../services/auth');
 const controller = {};
 
 controller.showLogin = (req, res) => {
-  console.log('test');
+
   res.render('users/login');
 }
 
 controller.login = passport.authenticate(
   'local-login', {
-    failureRedirect: '/users/login',
-    successRedirect: '/users/profile'
+    failureRedirect: '/user/login',
+    successRedirect: '/user/profile'
   }
 );
 
 controller.showNew = (req, res) => {
-  res.render('/users/signup');
+  res.render('users/signup');
 }
 
 controller.new = passport.authenticate(
   'local-signup', {
-    failureRedirect: '/users/new',
-    successRedirect: '/users/profile'
+    failureRedirect: '/user/signup',
+    successRedirect: '/user/profile'
   }
 );
+
 
 controller.logout = (req, res) => {
   req.logout();
@@ -33,24 +34,31 @@ controller.logout = (req, res) => {
 }
 
 controller.showProfile = (req, res) => {
-  const username = req.user.name;
-  res.redirect('/users/?user=' + username);
+  const name = req.user.name;
+  console.log(name);
+  res.redirect('/user/?name=' + name);
+
+}
+
+controller.test = (req, res, next) => {
+  console.log('test');
+  console.log(req.body);
+  next();
 }
 
 controller.showUser = (req, res) => {
-  const username = req.query.user;
+  const name = req.query.name;
   Users
-    .findPlixByUserName(username)
+    .findPlixByName(name)
     .then(data => {
       const renderData = {
-        name: username,
-        plix: data,
-        status: true
+        name: name,
+        plix: data
       }
       console.log('--------------------------');
       console.log('GOT USER');
       console.log(renderData);
-      res.render('/users/show', renderData);
+      res.render('users/show', renderData);
     })
     .catch(err => {
       console.log('----------------------------');

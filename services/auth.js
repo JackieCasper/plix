@@ -20,8 +20,7 @@ AuthService.restrict = (req, res, next) => {
 }
 
 AuthService.redirectUser = (req, res, next) => {
-  console.log('CHECKING IF USER');
-  console.log(next());
+  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
     const username = req.user.name;
     res.redirect('/users/' + username);

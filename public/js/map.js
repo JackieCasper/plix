@@ -182,7 +182,7 @@ map.getPlace = (key, location, placeId) => {
     method: 'GET',
     success: (data) => {
       map.clearMarkers();
-      map.setLocation(data.results[0].geometry.location);
+      map.setLocation(data.results[0].geometry.location, data.results[0].formatted_address, data.results[0].place_id);
       map.currentPlace = data.results[0];
       console.log(map.currentPlace);
     },
@@ -262,7 +262,8 @@ map.clearMarkers = () => {
   map.markers = [];
 }
 
-map.setLocation = (location, name) => {
+map.setLocation = (location, name, placeId) => {
+  map.search.$searchInput.val(name);
   map.currentPlace
   map.map.setCenter({
     lat: location.lat,
@@ -272,6 +273,14 @@ map.setLocation = (location, name) => {
   map.markers.push(new google.maps.Marker({
     map: map.map,
     title: name,
-    position: location
+    position: {
+      lat: location.lat,
+      lng: location.lng
+    }
   }));
+  if ($('.plix-form').length) {
+
+    $('#place-id').val(placeId)
+
+  }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plix</title>
+</head>
+
+<body>
+  <h1>Plix</h1>
+  <form class="signup-form" method="post" action="/user/new">
+    <h2>Login</h2>
+    <div class="login-input-container">
+      <label class="login-label" for="email">Email</label>
+      <input required class="login-input" type="email" name="user[email]" id="email">
+      <p class="input-error"></p>
+    </div>
+    <div class="login-input-container">
+      <label class="login-label" for="name">Username</label>
+      <input required class="login-input" type="text" name="name" id="name">
+      <p class="input-error"></p>
+    </div>
+    <div class="login-input-container">
+      <label class="login-label" for="password">Password</label>
+      <input required class="login-input" type="password" name="user[password]" id="password">
+      <p class="input-error"></p>
+    </div>
+    <button class="login-button" id="login">Sign Up</button>
+    <button class="login-button" id="cancel">Cancel</button>
+
+  </form>
+</body>
+
+</html>

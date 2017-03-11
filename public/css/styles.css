@@ -4,10 +4,6 @@ html {
   margin: 0 auto;
 }
 
-body {
-  padding: 0 10px;
-}
-
 #map {
   height: 50vh;
 }
@@ -25,7 +21,7 @@ body {
   -ms-flex-direction: column;
   -o-flex-direction: column;
   flex-direction: column;
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   width: 100%;
 }
@@ -91,4 +87,196 @@ body {
   color: grey;
   font-size: .8em;
   margin-left: 10px;
+}
+
+#plix-img {
+  margin-left: -100%;
+  height: 0px;
+}
+
+.plix-form {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+}
+
+.upload-label {
+  background-color: gray;
+  background-image: url(/img/upload.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 60%;
+  display: block;
+  height: 40vh;
+  width: 100%;
+}
+
+.plix-description {
+  display: block;
+  font-size: 1em;
+  height: 20vh;
+  margin: 0;
+  padding: 10px;
+  resize: none;
+}
+
+.submit-plix {
+  background-color: #449093;
+  border: 0px solid transparent;
+  color: white;
+  font-size: 1em;
+  padding: 10px;
+}
+
+.top-nav {
+  -ms-align-items: stretch;
+  align-items: stretch;
+  background-color: #444;
+  color: white;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  height: 40px;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: fixed;
+  width: 100%;
+  z-index: 66;
+}
+
+.menu-icon {
+  background-image: url(/img/menu.svg);
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  width: 40px;
+}
+
+.top-nav>a {
+  color: white;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+a>h1 {
+  margin: 0 auto;
+}
+
+.new-plix-icon {
+  background-image: url(/img/upload.svg);
+  background-position: center;
+  background-size: auto 70%;
+  background-repeat: no-repeat;
+  width: 80px;
+}
+
+.side-nav {
+  -ms-align-items: stretch;
+  align-items: stretch;
+  background-color: #449093;
+  color: white;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  left: -170px;
+  position: fixed;
+  top: 40px;
+  transition: left .5s ease;
+}
+
+.side-nav.show {
+  left: 0;
+}
+
+.nav-link {
+  color: white;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  height: 40px;
+  padding: 10px;
+  min-width: 150px;
+  text-decoration: none;
+  z-index: 6;
+}
+
+.nav-link:hover {
+  background-color: #54babe;
+}
+
+.nav-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 10px;
+  width: 30px;
+}
+
+.nav-text {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  font-size: 1.3em;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+}
+
+.user {
+  background-image: url(/img/user.svg);
+}
+
+.explore {
+  background-image: url(/img/explore.svg);
+}
+
+.logout {
+  background-image: url(/img/logout.svg);
 }

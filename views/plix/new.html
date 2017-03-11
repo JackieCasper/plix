@@ -28,6 +28,13 @@
     </div>
 
     <div class="results"></div>
+    <form class="plix-form" id="new-plix" enctype="multipart/form-data" method="post" action="/plix/new">
+      <input class="hidden-input" hidden="hidden" id="place-id" name="placeId" />
+      <label class="upload-label" for="plix-img"></label>
+      <input type="file" name="image" id="plix-img" accept="image/gif,image/jpeg,image/x-png," required />
+      <textarea name="description" id="plix-description" class="plix-description" required></textarea>
+      <button class="submit-plix">Share</button>
+    </form>
   </div>
 
 </body>

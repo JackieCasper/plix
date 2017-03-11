@@ -1,16 +1,35 @@
 const passport = require('passport');
 // We're going to need the User model
-const User = require('./models/user');
+const User = require('../models/users');
 // And we're going to need the Local Strategy for this kind of registration
 const LocalStrategy = require('passport-local').Strategy;
 // We'll also need bcrypt to authenticate uses without storing their
 // passoword _anywhere_...
 const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const flash = require('flash');
+
+const app = require('express')();
+const session = require('express-session');
 
 const Passport = {};
 
 
+
+
+
 Passport.init = () => {
+
+  // body-parser setup
+  app.use(bodyParser.urlencoded({
+    extended: false
+  }));
+
+  app.use(bodyParser.json());
+
+  app.use(cookieParser());
+
   // Important: mount express middleware BEFORE passport middleware
   app.use(session({
     secret: 'keyboard cat',
@@ -22,7 +41,7 @@ Passport.init = () => {
 
   app.use(passport.session());
 
-  app.use(logger('dev'));
+  //  app.use(logger('dev'));
 
   app.use(bodyParser.urlencoded({
     extended: true
@@ -74,8 +93,9 @@ Passport.init = () => {
       passwordField: 'user[password]',
       passReqToCallback: true
     }, (req, email, password, done) => {
+      console.log('CREATING USER');
       User
-        .create(req.body.user)
+        .create(email, req.body.name, password)
         .then((user) => {
           return done(null, user);
         })
@@ -89,10 +109,10 @@ Passport.init = () => {
   passport.use(
     'local-login',
     new LocalStrategy({
-      usernameField: 'user[name]',
+      usernameField: 'user[email]',
       passwordField: 'user[password]',
       passReqToCallback: true
-    }, (req, name, password, done) => {
+    }, (req, email, password, done) => {
       User
         .findByEmail(email)
         .then((user) => {
@@ -103,10 +123,14 @@ Passport.init = () => {
             if (isAuthed) {
               return done(null, user);
             } else {
-              return done(null, false);
+              return done(true, false, {
+                error: 'Incorrect email or password'
+              });
             }
           } else {
-            return done(null, false);
+            return done(true, false, {
+              error: 'User does not exist'
+            });
           }
         });
     })
