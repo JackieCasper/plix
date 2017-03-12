@@ -6,4 +6,5 @@ router.get('/new/', AuthService.redirect, controller.new);
 router.post('/new/', AuthService.redirect, controller.createNew);
 router.get('/:user/:id', controller.show);
 
+
 module.exports = router;

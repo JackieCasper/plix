@@ -26,8 +26,8 @@ Plix.addImg = (id, img, thumb) => {
   return db.one('UPDATE plix SET img = $1, thumb = $2 WHERE id = $3 RETURNING *', [img, thumb, id]);
 }
 
-Plix.edit = (description, location) => {
-
+Plix.edit = (description, id) => {
+  return db.one('UPDATE plix SET description = $1 WHERE id = $2 RETURNING *', [description, id]);
 }
 
 

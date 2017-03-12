@@ -20,7 +20,7 @@
 
 <body>
 
-  <div class="container plix-show-container">
+  <div class="container plix-show-container" data-plix-id="{{plix.id}}">
     <a class="show-info" href="/user/{{plix.username}}">
       <div class="user show-icon"></div>
       <p>{{plix.username}}</p>
@@ -35,7 +35,7 @@
       <img class="static-map">
     </a>
     <div class="show-description-container">
-      <textarea readonly class="show-description-edit">{{plix.description}}</textarea>
+      <textarea maxlength="255" readonly class="show-description-edit">{{plix.description}}</textarea>
       <div class="edit-icon"></div>
     </div>
   </div>

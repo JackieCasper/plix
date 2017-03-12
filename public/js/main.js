@@ -18,7 +18,8 @@ const initPage = (key) => {
   });
   $('.plix-description').keyup(() => {
     plixUpload.descriptionCheck();
-  })
+  });
+
   const $plixShowImg = $('.plix-show-img');
   if ($plixShowImg.width() > $plixShowImg.height()) {
     $('.plix-img-container').height($plixShowImg.height());
@@ -36,7 +37,19 @@ const initPage = (key) => {
         .focusin();
       $(e.target)
         .one('click', (e) => {
-          console.log('submit edit');
+          const plixId = $('.plix-show-container').attr('data-plix-id');
+          const editData = {
+            description: $textarea.val();
+          }
+          $.ajax({
+            url: '/api/plix/' + plixId,
+            type: 'PUT',
+            data: editData,
+            success: (data) => {
+              console.log(data);
+            },
+            error: err => console.log(err);
+          })
         })
         .text('Submit');
     } else {
