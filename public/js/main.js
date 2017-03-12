@@ -21,6 +21,6 @@ const initPage = (key) => {
   })
   const $plixShowImg = $('.plix-show-img');
   if ($plixShowImg.width() > $plixShowImg.height()) {
-    $('.plix-show-container').height($plixShowImg.height());
+    $('.plix-img-container').height($plixShowImg.height());
   }
 }
