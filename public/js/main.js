@@ -28,13 +28,13 @@ const initPage = (key) => {
 
   $('.edit-icon').click((e) => {
     const $textarea = $('.show-description-edit');
-    $(e.target)
+    $('.edit-icons')
       .toggleClass('editing');
 
     if ($textarea.prop('readonly')) {
       $textarea
         .prop('readonly', false)
-        .focusin();
+        .focus();
       $(e.target)
         .one('click', (e) => {
           const plixId = $('.plix-show-container').attr('data-plix-id');

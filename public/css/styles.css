@@ -444,13 +444,21 @@ a>h1 {
   background-position: center;
   background-size: 60%;
   background-repeat: no-repeat;
-  bottom: 0;
   color: white;
   cursor: pointer;
   height: 30px;
+  width: 30px;
+}
+
+.edit-icons {
+  bottom: 0;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
   position: absolute;
   right: 0;
-  width: 30px;
 }
 
 .show-description-edit {
@@ -466,11 +474,12 @@ a>h1 {
   outline: 0px solid transparent;
 }
 
-.edit-icon:hover {
+.edit-icon:hover,
+.cancelEditing:hover {
   background-color: #449093;
 }
 
-.editing {
+.editing>.edit-icon {
   -ms-align-items: center;
   align-items: center;
   background-image: none;
@@ -488,6 +497,26 @@ a>h1 {
   width: auto;
 }
 
-.editing::after {
-  content: "Cancel";
+.cancel-editing {
+  -ms-align-items: center;
+  align-items: center;
+  background-color: #777;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  color: white;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  padding: 0 7px;
+  margin-left: 5px;
+  width: auto;
+}
+
+.editing>.cancel-editing {
+  width: auto;
 }
