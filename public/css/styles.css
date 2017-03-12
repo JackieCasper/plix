@@ -390,7 +390,6 @@ a>h1 {
 }
 
 .static-map {
-  margin-top: 10px;
   width: 100%;
 }
 
@@ -408,7 +407,7 @@ a>h1 {
   -ms-flex-wrap: wrap;
   -o-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding-top: 10px;
+  text-decoration: none;
   width: 100%;
 }
 
@@ -416,7 +415,7 @@ a>h1 {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  margin-right: 20px;
+  margin: 0 20px;
   height: 30px;
   width: 30px;
 }
