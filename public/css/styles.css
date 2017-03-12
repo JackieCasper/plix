@@ -130,6 +130,10 @@ html {
   width: 100%;
 }
 
+.upload-img {
+  width: 100%;
+}
+
 .plix-description-container {
   display: -webkit-flex;
   display: -moz-flex;
@@ -360,8 +364,11 @@ a>h1 {
 }
 
 .plix-list-item {
-  width: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   max-width: 298px;
+  width: 50%;
 }
 
 .plix-show-container {
@@ -373,7 +380,12 @@ a>h1 {
 
 .plix-img-container {
   height: 600px;
+  overflow: hidden;
   width: 600px;
+}
+
+.plix-show-img {
+  width: 100$;
 }
 
 .static-map {
