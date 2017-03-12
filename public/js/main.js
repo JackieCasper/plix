@@ -25,7 +25,7 @@ const initPage = (key) => {
     $('.plix-img-container').height($plixShowImg.height());
   }
 
-
+  let description = $('.show-description-edit').val();
   $('.edit-icon').click((e) => {
     const $textarea = $('.show-description-edit');
     $('.edit-icons')
@@ -46,7 +46,7 @@ const initPage = (key) => {
             type: 'PUT',
             data: editData,
             success: (data) => {
-              console.log(data);
+              description = $('.show-description-edit').val();
             },
             error: err => console.log(err)
           })
@@ -59,4 +59,13 @@ const initPage = (key) => {
       $(e.target).text('');
     }
   });
+
+  $('.cancel-editing').click((e) => {
+    const $textarea = $('.show-description-edit')
+      .prop('readonly', true)
+      .focusout()
+      .val(description);
+    $('.edit-icon').text('');
+    $('.edit-icons').removeClass('editing');
+  })
 }
