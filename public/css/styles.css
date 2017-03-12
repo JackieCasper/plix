@@ -382,7 +382,7 @@ a>h1 {
 .plix-img-container {
   height: 600px;
   overflow: hidden;
-  width: 600px;
+  width: 100%;
 }
 
 .plix-show-img {
@@ -390,17 +390,26 @@ a>h1 {
 }
 
 .static-map {
+  margin-top: 10px;
   width: 100%;
 }
 
 .show-info {
   -ms-align-items: center;
   align-items: center;
+  color: white;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
   display: -o-flex;
   display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  width: 100%;
 }
 
 .show-icon {
@@ -408,6 +417,6 @@ a>h1 {
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 20px;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
