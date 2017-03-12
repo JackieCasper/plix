@@ -26,15 +26,18 @@
       <p>{{plix.username}}</p>
     </a>
 
-    <a class="plix-img-container">
-      <img src="{{plix.img}}" class="plix-show-img" />
+    <a class="plix-img-container" href="{{plix.img}}" />
+    <img src="{{plix.img}}" class="plix-show-img" />
     </a>
     <a class="show-info" href="/locations/{{plix.location_id}}">
       <div class="explore show-icon"></div>
       <p>{{plix.address}}</p>
       <img class="static-map">
     </a>
-
+    <div class="show-description-container">
+      <textarea readonly class="show-description-edit">{{plix.description}}</textarea>
+      <div class="edit-icon"></div>
+    </div>
   </div>
 
 

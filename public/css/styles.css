@@ -396,6 +396,7 @@ a>h1 {
 .show-info {
   -ms-align-items: center;
   align-items: center;
+  background-color: #777;
   color: white;
   display: -webkit-flex;
   display: -moz-flex;
@@ -418,4 +419,42 @@ a>h1 {
   margin: 0 20px;
   height: 30px;
   width: 30px;
+}
+
+.show-description-container {
+  -ms-align-items: stretch;
+  align-items: stretch;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.edit-icon {
+  background-color: #777;
+  background-image: url(/img/edit.svg);
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+}
+
+.show-description-edit {
+  padding: 10px;
+}
+
+.edit-icon:hover {
+  background-color: #449093;
 }
