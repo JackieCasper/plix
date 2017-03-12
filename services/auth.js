@@ -23,7 +23,7 @@ AuthService.redirectUser = (req, res, next) => {
   console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
     const username = req.user.name;
-    res.redirect('/users/' + username);
+    res.redirect('/user/profile/');
   } else {
     next();
   }

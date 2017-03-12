@@ -452,7 +452,16 @@ a>h1 {
 }
 
 .show-description-edit {
+  background-color: #ccc;
+  border: 0px solid transparent;
+  color: #444;
+  height: 80px;
   padding: 10px;
+  resize: none;
+}
+
+.show-description-edit:focus {
+  outline: 0px solid transparent;
 }
 
 .edit-icon:hover {
