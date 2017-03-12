@@ -58,5 +58,5 @@ const initPage = (key) => {
         .focusout();
       $(e.target).text('');
     }
-  })
+  });
 }
