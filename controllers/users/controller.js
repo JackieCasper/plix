@@ -12,7 +12,8 @@ controller.showLogin = (req, res) => {
 controller.login = passport.authenticate(
   'local-login', {
     failureRedirect: '/user/login',
-    successRedirect: '/user/profile'
+    successRedirect: '/user/profile',
+    failureFlash: true
   }
 );
 
@@ -35,9 +36,16 @@ controller.logout = (req, res) => {
 
 controller.showProfile = (req, res) => {
   const name = req.user.name;
-  console.log(name);
-  res.redirect('/user/?name=' + name);
-
+  Users
+    .findPlixByName(name)
+    .then(data => {
+      const renderData = {
+        name: name,
+        plix: data
+      };
+      res.render('users/show', renderData);
+    })
+    .catch(err => console.log('ERROR GETTING USER', err));
 }
 
 controller.test = (req, res, next) => {

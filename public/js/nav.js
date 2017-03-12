@@ -3,12 +3,14 @@ Nav.links = [
   {
     href: '/user/profile',
     imgClass: 'user',
-    text: 'My Plix'
+    text: 'My Plix',
+    active: window.location.pathname.includes('profile') ? 'active' : ''
   },
   {
     href: '/locations',
     imgClass: 'explore',
-    text: 'Explore'
+    text: 'Explore',
+    active: window.location.pathname.includes('locations') ? 'active' : ''
   },
   {
     href: '/user/logout',
@@ -40,6 +42,7 @@ Nav.links = [
 //  </nav>
 
 Nav.init = () => {
+  console.log(window.location);
   const $sideNav = $('<nav>', {
       class: 'side-nav'
     })
@@ -49,9 +52,10 @@ Nav.init = () => {
         href: link.href,
         class: 'nav-link'
       })
+      .addClass(link.active)
       .appendTo($sideNav);
     const $icon = $('<div>', {
-        class: 'menu-icon ' + link.imgClass
+        class: 'nav-icon ' + link.imgClass
       })
       .appendTo($link);
     const $text = $('<p>', {

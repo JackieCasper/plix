@@ -108,23 +108,71 @@ html {
 }
 
 .upload-label {
+  -ms-align-items: center;
+  align-items: center;
   background-color: gray;
   background-image: url(/img/upload.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 60%;
-  display: block;
-  height: 40vh;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  min-height: 40vh;
+  overflow: hidden;
   width: 100%;
 }
 
-.plix-description {
-  display: block;
-  font-size: 1em;
-  height: 20vh;
+.plix-description-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+}
+
+.plix-description-container>label {
+  padding: 10px;
+}
+
+.description-length {
+  bottom: 0;
   margin: 0;
   padding: 10px;
+  position: absolute;
+  right: 0;
+}
+
+.description-length::after {
+  content: ' / 255';
+}
+
+.plix-description {
+  border: 0px solid transparent;
+  display: block;
+  font-size: 1em;
+  height: 80px;
+  margin: 0;
+  padding: 0 10px 10px 10px;
   resize: none;
+  overflow: hidden;
+}
+
+.plix-description:focus {
+  outline: 0px solid transparent;
 }
 
 .submit-plix {
@@ -153,6 +201,7 @@ html {
   justify-content: space-between;
   padding: 0 10px;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 66;
 }
@@ -201,7 +250,7 @@ a>h1 {
 .side-nav {
   -ms-align-items: stretch;
   align-items: stretch;
-  background-color: #449093;
+  background-color: #555;
   color: white;
   display: -webkit-flex;
   display: -moz-flex;
@@ -242,11 +291,15 @@ a>h1 {
   background-color: #54babe;
 }
 
+.nav-link.active {
+  background-color: #449093;
+}
+
 .nav-icon {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  margin-right: 10px;
+  margin-right: 20px;
   width: 30px;
 }
 
@@ -279,4 +332,50 @@ a>h1 {
 
 .logout {
   background-image: url(/img/logout.svg);
+}
+
+.plix-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 40px auto;
+  width: 100%;
+}
+
+.container .plix-container {
+  margin: 0 auto;
+}
+
+.plix-list-item {
+  width: 50%;
+  max-width: 298px;
+}
+
+.plix-show-container {
+  -ms-align-items: center;
+  align-items: center;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.plix-img-container {
+  height: 600px;
+  width: 600px;
+}
+
+.static-map {
+  width: 100%;
 }

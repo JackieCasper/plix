@@ -10,12 +10,14 @@
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{placesKey}}&libraries=places"></script>
 
-  <script src="/js/geolocation.js"></script>
   <script src="/js/map.js"></script>
-  <script src="/js/autocomplete.js"></script>
+  <script src="/js/plixUpload.js"></script>
   <script src="/js/nav.js"></script>
 
   <script src="/js/main.js"></script>
+  <script>
+    $(() => initPage("{{placesKey}}"));
+  </script>
 </head>
 
 <body>
@@ -30,9 +32,15 @@
     <div class="results"></div>
     <form class="plix-form" id="new-plix" enctype="multipart/form-data" method="post" action="/plix/new">
       <input class="hidden-input" hidden="hidden" id="place-id" name="placeId" />
-      <label class="upload-label" for="plix-img"></label>
+      <label class="upload-label" for="plix-img"><img class="upload-img" /></label>
       <input type="file" name="image" id="plix-img" accept="image/gif,image/jpeg,image/x-png," required />
-      <textarea name="description" id="plix-description" class="plix-description" required></textarea>
+      <div class="plix-description-container">
+        <label for="plix-description">Description</label>
+        <!-- max length: https://www.w3schools.com/tags/att_textarea_maxlength.asp-->
+        <textarea name="description" maxlength="255" id="plix-description" class="plix-description" required></textarea>
+        <p class="description-length">0</p>
+      </div>
+
       <button class="submit-plix">Share</button>
     </form>
   </div>

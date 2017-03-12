@@ -9,11 +9,11 @@
 
 <body>
   <h1>Plix</h1>
-  <form class="signup-form" method="post" action="/user/new">
+  <form class="signup-form" method="post" action="/user/new" enctype="multipart/form-data">
     <h2>Login</h2>
     <div class="login-input-container">
       <label class="login-label" for="email">Email</label>
-      <input required class="login-input" type="email" name="user[email]" id="email">
+      <input required class="login-input" type="email" name="email" id="email">
       <p class="input-error"></p>
     </div>
     <div class="login-input-container">
@@ -23,7 +23,7 @@
     </div>
     <div class="login-input-container">
       <label class="login-label" for="password">Password</label>
-      <input required class="login-input" type="password" name="user[password]" id="password">
+      <input required class="login-input" type="password" name="password" id="password">
       <p class="input-error"></p>
     </div>
     <button class="login-button" id="login">Sign Up</button>

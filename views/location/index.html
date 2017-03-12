@@ -9,13 +9,16 @@
   <script src="/js/jquery.js"></script>
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{placesKey}}&libraries=places"></script>
-
-  <script src="/js/geolocation.js"></script>
+  <script src="/js/plix.js"></script>
   <script src="/js/map.js"></script>
   <script src="/js/autocomplete.js"></script>
   <script src="/js/nav.js"></script>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js">
+  </script>
+  <script>
+    $(() => initPage("{{placesKey}}"));
+  </script>
 </head>
 
 <body>
@@ -28,6 +31,7 @@
     </div>
 
     <div class="results"></div>
+    <div class="plix-container"></div>
   </div>
 
 </body>

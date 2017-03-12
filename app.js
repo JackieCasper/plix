@@ -1,14 +1,17 @@
-//const dotenv = require('dotenv');
-//dotenv.load();
+const dotenv = require('dotenv');
+dotenv.load();
 
 const express = require('express');
 const logger = require('morgan');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const mustacheExpress = require('mustache-express');
 const flash = require('connect-flash');
+const bodyParser = require('body-parser');
+const busboyBodyParser = require('busboy-body-parser');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +20,14 @@ app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
+
+// body-parser setup
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
+app.use(busboyBodyParser());
 
 // Important: mount express middleware BEFORE passport middleware
 app.use(session({
@@ -27,13 +38,15 @@ app.use(session({
 
 app.use(passport.initialize());
 
-app.use(passport.session());
+app.use(passport.session({
+  pauseStream: true
+}));
 
 app.use(logger('dev'));
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+//app.use(bodyParser.urlencoded({
+//  extended: true
+//}));
 
 app.use(cookieParser());
 
@@ -85,12 +98,13 @@ passport.use(
   new LocalStrategy({
     // these are the names of the fields for email and password in
     // the login form we'll be serving (see the view)
-    usernameField: 'user[email]',
-    passwordField: 'user[password]',
+    usernameField: 'email',
+    passwordField: 'password',
     passReqToCallback: true
   }, (req, email, password, done) => {
+
     User
-      .create(req.body.user.email, req.body.name, req.body.user.password)
+      .create(req.body.email, req.body.name, req.body.password)
       .then((user) => {
         return done(null, user);
       })
@@ -104,10 +118,11 @@ passport.use(
 passport.use(
   'local-login',
   new LocalStrategy({
-    usernameField: 'user[email]',
-    passwordField: 'user[password]',
+    usernameField: 'email',
+    passwordField: 'password',
     passReqToCallback: true
   }, (req, email, password, done) => {
+    console.log('LOGIN');
     User
       .findByEmail(email)
       .then((user) => {
@@ -118,10 +133,14 @@ passport.use(
           if (isAuthed) {
             return done(null, user);
           } else {
-            return done(null, false);
+            return done(null, false, {
+              message: 'Incorrect password.'
+            });
           }
         } else {
-          return done(null, false);
+          return done(null, false, {
+            message: 'Incorrect email.'
+          });
         }
       });
   })

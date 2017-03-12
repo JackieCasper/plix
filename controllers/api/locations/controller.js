@@ -15,18 +15,57 @@ controller.create = (req, res) => {
 }
 
 controller.findNearby = (req, res) => {
-  const id = req.params.id;
+  const searchData = {
+    lat: req.body.lat,
+    lng: req.body.lng,
+    distance: req.body.distance
+  }
   Locations
-    .findNearbyPlix(id)
-    .then(data => {
-      console.log('-----------------------');
-      console.log('FOUND NEARBY PLIX');
-      console.log(data);
-      res.json(data);
+    .findNearby(searchData.lat, searchData.lng, searchData.distance)
+    .then(nearbyLocations => {
+      const formattedPlix = [];
+
+      console.log('      ------------------------------');
+      console.log('      GOT NEARBY LOCATIONS');
+      console.log(nearbyLocations);
+      if (!nearbyLocations.length) {
+        console.log('NO NEARBY LOCATIONS');
+        res.json({
+          plix: [],
+          message: 'No Results'
+        });
+      }
+      nearbyLocations.forEach(nearbyLocation => {
+        Locations
+          .findPlix(nearbyLocation.id)
+          .then(nearbyPlix => {
+            console.log('         ---------------------------');
+            console.log('         GOT PLIX');
+            console.log(nearbyPlix);
+            nearbyPlix.forEach(plix => {
+              plix.location = nearbyLocation;
+              formattedPlix.push(plix);
+            });
+            res.json({
+              plix: formattedPlix,
+              message: 'OK'
+            });
+          })
+          .catch(err => {
+            /////////////////////////
+            // SET CENTER LOCATION TO ERROR
+            /////////////////////////
+            console.log('         ---------------------------');
+            console.log('         ERROR GETTING PLIX');
+            console.log(err);
+          });
+
+
+      });
     })
     .catch(err => {
       console.log('------------------------');
-      console.log('ERROR FINDING NEARBY PLIX');
+      console.log('ERROR FINDING NEARBY LOCATIONS');
       console.log(err);
     })
 
@@ -57,13 +96,5 @@ controller.fetchPlaceByKeyword = (req, res) => {
 }
 
 
-controller.getGeoIp = (req, res) => {
-  let ip = req.ip.split(':');
-  ip = ip[ip.length - 1];
-  res.json({
-    location: Locations.getGeoIp(ip),
-    ip: ip
-  });
-}
 
 module.exports = controller;

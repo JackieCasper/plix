@@ -1,27 +1,22 @@
-$(() => {
-  let keys;
-  const getKeys = () => {
-    $.ajax({
-      url: '/api/keys',
-      method: 'GET',
-      success: (data) => {
-        keys = data;
-        initPage();
-      },
-      error: err => console.log(err)
-
-    });
+const initPage = (key) => {
+  if (typeof map != 'undefined') {
+    map.init(key);
   }
-  getKeys();
 
-  const initPage = () => {
-    if (typeof map != 'undefined') {
-      map.init(keys.placesKey);
-    }
-  }
   if (typeof Nav != 'undefined') {
     Nav.init();
   }
+  let $plixItem = $('.plix-list-item');
+  $plixItem.height($plixItem.width());
+  $(window).resize(() => {
+    $plixItem = $('.plix-list-item');
+    $plixItem.height($plixItem.width());
+  })
 
-
-})
+  $('#plix-img').change(function () {
+    plixUpload.validate(this);
+  });
+  $('.plix-description').keyup(() => {
+    plixUpload.descriptionCheck();
+  })
+}
