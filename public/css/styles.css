@@ -170,7 +170,7 @@ html {
   font-size: 1em;
   height: 80px;
   margin: 0;
-  padding: 0 10px 10px 10px;
+  padding: 10px;
   resize: none;
   overflow: hidden;
 }
@@ -512,6 +512,7 @@ a>h1 {
   -ms-justify-content: center;
   -o-justify-content: center;
   justify-content: center;
+  overflow: hidden;
   padding: 0 7px;
   margin-left: 0px;
   width: 0;
@@ -520,4 +521,24 @@ a>h1 {
 .editing>.cancel-editing {
   margin-left: 5px;
   width: auto;
+}
+
+.delete-plix {
+  -ms-align-items: center;
+  align-items: center;
+  background-color: #449093;
+  color: white;
+  cursor: pointer;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  height: 40px;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  width: 100%;
 }
