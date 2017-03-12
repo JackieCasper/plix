@@ -444,15 +444,16 @@ a>h1 {
   background-position: center;
   background-size: 60%;
   background-repeat: no-repeat;
+  bottom: 0;
+  cursor: pointer;
   height: 30px;
   position: absolute;
   right: 0;
-  top: 0;
   width: 30px;
 }
 
 .show-description-edit {
-  background-color: #ccc;
+  background-color: #eee;
   border: 0px solid transparent;
   color: #444;
   height: 80px;
@@ -466,4 +467,9 @@ a>h1 {
 
 .edit-icon:hover {
   background-color: #449093;
+}
+
+.editing {
+  background-image: none;
+  width: auto;
 }

@@ -23,4 +23,22 @@ const initPage = (key) => {
   if ($plixShowImg.width() > $plixShowImg.height()) {
     $('.plix-img-container').height($plixShowImg.height());
   }
+  $('.edit-icon').click((e) => {
+    $(e.target)
+      .toggleClass('editing')
+      .text('Submit')
+      .one('click', (e) => {
+        console.log('submit edit');
+      });
+    const $textarea = $('.show-description-edit');
+    if ($textarea.prop('disabled')) {
+      $textarea
+        .removeProp('disabled')
+        .focusin();
+    } else {
+      $textarea
+        .prop('disabled', true)
+        .focusout();
+    }
+  })
 }
