@@ -48,7 +48,7 @@ const initPage = (key) => {
             success: (data) => {
               console.log(data);
             },
-            error: err => console.log(err);
+            error: err => console.log(err)
           })
         })
         .text('Submit');
