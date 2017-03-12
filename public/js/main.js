@@ -39,7 +39,7 @@ const initPage = (key) => {
         .one('click', (e) => {
           const plixId = $('.plix-show-container').attr('data-plix-id');
           const editData = {
-            description: $textarea.val();
+            description: $textarea.val()
           }
           $.ajax({
             url: '/api/plix/' + plixId,
