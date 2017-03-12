@@ -17,6 +17,10 @@ Plix.search = (searchOptions) => {
 
 }
 
+Plix.delete = (id) => {
+  return db.none('DELETE FROM plix WHERE id=$1', [id]);
+}
+
 
 Plix.create = (userId, locationId, description) => {
   return db.one('INSERT INTO plix (user_id, location_id, description) VALUES ($1, $2, $3) RETURNING id', [userId, locationId, description]);

@@ -1,6 +1,5 @@
 const Plix = require('../../../models/plix');
 const passport = require('passport');
-const AuthService = require('../../../services/auth');
 // set up the controller
 const controller = {};
 
@@ -29,9 +28,14 @@ controller.update = (req, res) => {
     .catch(err => console.log('ERROR UPDATING PLIX', err));
 }
 
-// secure
-controller.delete = (req, res) => {
 
+controller.delete = (req, res) => {
+  Plix
+    .delete(req.params.id)
+    .then(() => {
+      res.send('plix deleted');
+    })
+    .catch(err => console.log(err));
 }
 
 controller.getSignedUrl = (req, res) => {

@@ -67,5 +67,16 @@ const initPage = (key) => {
       .val(description);
     $('.edit-icon').text('');
     $('.edit-icons').removeClass('editing');
+  });
+  $('.delete-plix').one('click', () => {
+    const plixId = $('.plix-show-container').attr('data-plix-id');
+    $.ajax({
+      url: '/api/plix/' + plixId,
+      type: 'DELETE',
+      success: (data) => {
+        window.location.replace('/user/profile');
+      },
+      error: err => console.log(err)
+    })
   })
 }

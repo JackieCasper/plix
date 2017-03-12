@@ -187,6 +187,10 @@ html {
   padding: 10px;
 }
 
+.submit-plix:hover {
+  background-color: #54babe;
+}
+
 .top-nav {
   -ms-align-items: stretch;
   align-items: stretch;
@@ -412,6 +416,10 @@ a>h1 {
   width: 100%;
 }
 
+.show-info:hover {
+  background-color: #449093;
+}
+
 .show-icon {
   background-size: contain;
   background-repeat: no-repeat;
@@ -501,6 +509,7 @@ a>h1 {
   -ms-align-items: center;
   align-items: center;
   background-color: #777;
+  cursor: pointer;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
@@ -513,13 +522,14 @@ a>h1 {
   -o-justify-content: center;
   justify-content: center;
   overflow: hidden;
-  padding: 0 7px;
+  padding: 0;
   margin-left: 0px;
   width: 0;
 }
 
 .editing>.cancel-editing {
   margin-left: 5px;
+  padding: 0 7px;
   width: auto;
 }
 
@@ -541,4 +551,8 @@ a>h1 {
   -o-justify-content: center;
   justify-content: center;
   width: 100%;
+}
+
+.delete-plix:hover {
+  background-color: #54babe;
 }
