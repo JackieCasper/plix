@@ -267,6 +267,7 @@ a>h1 {
   position: fixed;
   top: 40px;
   transition: left .5s ease;
+  z-index: 1000000;
 }
 
 .side-nav.show {
@@ -284,7 +285,6 @@ a>h1 {
   padding: 10px;
   min-width: 150px;
   text-decoration: none;
-  z-index: 6;
 }
 
 .nav-link:hover {
