@@ -27,14 +27,15 @@ const initPage = (key) => {
     $(e.target)
       .toggleClass('editing')
       .text('Submit')
-      .one('click', (e) => {
-        console.log('submit edit');
-      });
+
     const $textarea = $('.show-description-edit');
     if ($textarea.prop('disabled')) {
       $textarea
-        .removeProp('disabled')
+        .prop('disabled', false)
         .focusin();
+      $(e.target).one('click', (e) => {
+        console.log('submit edit');
+      });
     } else {
       $textarea
         .prop('disabled', true)

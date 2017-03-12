@@ -471,5 +471,16 @@ a>h1 {
 
 .editing {
   background-image: none;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  padding: 0 7px;
   width: auto;
 }
