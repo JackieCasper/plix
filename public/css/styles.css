@@ -374,6 +374,7 @@ a>h1 {
 .plix-show-container {
   -ms-align-items: center;
   align-items: center;
+  margin-top: 40px;
   max-width: 600px;
   overflow: hidden;
 }
@@ -392,6 +393,21 @@ a>h1 {
   width: 100%;
 }
 
-.pix-show-container {
-  margin-top: 40px;
+.show-info {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+.show-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 20px;
+  height: 40px;
+  width: 40px;
 }

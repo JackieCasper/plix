@@ -55,7 +55,7 @@ controller.test = (req, res, next) => {
 }
 
 controller.showUser = (req, res) => {
-  const name = req.query.name;
+  const name = req.params.name;
   Users
     .findPlixByName(name)
     .then(data => {

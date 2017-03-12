@@ -21,8 +21,17 @@
 <body>
 
   <div class="container plix-show-container">
+    <a class="show-info" href="/user/{{plix.username}}">
+      <div class="user show-icon"></div>
+      <p>{{plix.username}}</p>
+    </a>
+
     <a class="plix-img-container">
       <img src="{{plix.img}}" class="plix-show-img" />
+    </a>
+    <a class="show-info" href="/locations/{{plix.location_id}}">
+      <div class="explore show-icon"></div>
+      <p>{{plix.address}}</p>
     </a>
     <img class="static-map">
   </div>

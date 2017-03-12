@@ -10,7 +10,7 @@ var BUCKET = process.env.S3_BUCKET;
 const Plix = {};
 
 Plix.findById = (id) => {
-  return db.oneOrNone('SELECT plix.id, plix.description, plix.img, plix.thumb, locations.address, locations.id, locations.place_id, locations.lat, locations.lng, users.name AS username FROM plix JOIN locations ON locations.id = plix.location_id JOIN users ON users.id = plix.user_id WHERE plix.id = $1', [id]);
+  return db.oneOrNone('SELECT plix.id, plix.description, plix.img, plix.thumb, locations.address, locations.id AS location_id, locations.place_id, locations.lat, locations.lng, users.name AS username FROM plix JOIN locations ON locations.id = plix.location_id JOIN users ON users.id = plix.user_id WHERE plix.id = $1', [id]);
 }
 
 Plix.search = (searchOptions) => {
