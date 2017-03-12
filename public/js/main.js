@@ -19,4 +19,8 @@ const initPage = (key) => {
   $('.plix-description').keyup(() => {
     plixUpload.descriptionCheck();
   })
+  const $plixShowImg = $('.plix-show-img');
+  if ($plixShowImg.width() > $plixShowImg.height()) {
+    $('.plix-show-container').height($plixShowImg.height());
+  }
 }
