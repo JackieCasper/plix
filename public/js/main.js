@@ -23,23 +23,27 @@ const initPage = (key) => {
   if ($plixShowImg.width() > $plixShowImg.height()) {
     $('.plix-img-container').height($plixShowImg.height());
   }
-  $('.edit-icon').click((e) => {
-    $(e.target)
-      .toggleClass('editing')
-      .text('Submit')
 
+
+  $('.edit-icon').click((e) => {
     const $textarea = $('.show-description-edit');
-    if ($textarea.prop('disabled')) {
+    $(e.target)
+      .toggleClass('editing');
+
+    if ($textarea.prop('readonly')) {
       $textarea
-        .prop('disabled', false)
+        .prop('readonly', false)
         .focusin();
-      $(e.target).one('click', (e) => {
-        console.log('submit edit');
-      });
+      $(e.target)
+        .one('click', (e) => {
+          console.log('submit edit');
+        })
+        .text('Submit');
     } else {
       $textarea
-        .prop('disabled', true)
+        .prop('readonly', true)
         .focusout();
+      $(e.target).text('');
     }
   })
 }

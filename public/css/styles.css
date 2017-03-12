@@ -470,6 +470,8 @@ a>h1 {
 }
 
 .editing {
+  -ms-align-items: center;
+  align-items: center;
   background-image: none;
   display: -webkit-flex;
   display: -moz-flex;
