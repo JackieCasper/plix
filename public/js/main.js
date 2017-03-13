@@ -22,9 +22,12 @@ var initPage = function (key) {
   });
 
   var $plixShowImg = $('.plix-show-img');
-  if ($plixShowImg.width() > $plixShowImg.height()) {
-    $('.plix-img-container').height($plixShowImg.height());
-  }
+  $plixShowImg.load(function () {
+    if ($plixShowImg.width() > $plixShowImg.height()) {
+      $('.plix-img-container').height($plixShowImg.height());
+    }
+  })
+
 
   var description = $('.show-description-edit').val();
   $('.edit-icon').click(function (e) {
