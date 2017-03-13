@@ -1,4 +1,4 @@
-const initPage = function (key) {
+var initPage = function (key) {
 
   if (typeof map != 'undefined') {
     map.init(key);
@@ -7,7 +7,7 @@ const initPage = function (key) {
   if (typeof Nav != 'undefined') {
     Nav.init();
   }
-  let $plixItem = $('.plix-list-item');
+  var $plixItem = $('.plix-list-item');
   $plixItem.height($plixItem.width());
   $(window).resize(function () {
     $plixItem = $('.plix-list-item');
@@ -21,14 +21,14 @@ const initPage = function (key) {
     plixUpload.descriptionCheck();
   });
 
-  const $plixShowImg = $('.plix-show-img');
+  var $plixShowImg = $('.plix-show-img');
   if ($plixShowImg.width() > $plixShowImg.height()) {
     $('.plix-img-container').height($plixShowImg.height());
   }
 
-  let description = $('.show-description-edit').val();
+  var description = $('.show-description-edit').val();
   $('.edit-icon').click(function (e) {
-    const $textarea = $('.show-description-edit');
+    var $textarea = $('.show-description-edit');
     $('.edit-icons')
       .toggleClass('editing');
 
@@ -38,8 +38,8 @@ const initPage = function (key) {
         .focus();
       $(e.target)
         .one('click', function (e) {
-          const plixId = $('.plix-show-container').attr('data-plix-id');
-          const editData = {
+          var plixId = $('.plix-show-container').attr('data-plix-id');
+          var editData = {
             description: $textarea.val()
           }
           $.ajax({
@@ -64,7 +64,7 @@ const initPage = function (key) {
   });
 
   $('.cancel-editing').click(function (e) {
-    const $textarea = $('.show-description-edit')
+    var $textarea = $('.show-description-edit')
       .prop('readonly', true)
       .focusout()
       .val(description);
@@ -72,7 +72,7 @@ const initPage = function (key) {
     $('.edit-icons').removeClass('editing');
   });
   $('.delete-plix').one('click', function () {
-    const plixId = $('.plix-show-container').attr('data-plix-id');
+    var plixId = $('.plix-show-container').attr('data-plix-id');
     $.ajax({
       url: '/api/plix/' + plixId,
       type: 'DELETE',

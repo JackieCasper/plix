@@ -1,5 +1,5 @@
-const map = {};
-const styles = [
+var map = {};
+var styles = [
   {
     "featureType": "administrative",
     "elementType": "labels.text.fill",
@@ -134,7 +134,7 @@ const styles = [
 // init the map
 map.init = function (key, location, placeId) {
 
-  const defaultLocation = {
+  var defaultLocation = {
 
     lat: 40.739838299999995,
     lng: -73.9895757
@@ -142,7 +142,7 @@ map.init = function (key, location, placeId) {
   };
 
 
-  const mapOptions = {
+  var mapOptions = {
     zoom: 16,
     styles: styles,
     zoomControl: true,
@@ -179,7 +179,7 @@ map.init = function (key, location, placeId) {
 };
 
 map.getPlace = function (key, location, placeId) {
-  const url = placeId ? `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${key}` : `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`;
+  var url = placeId ? `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${key}` : `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`;
   $.ajax({
     url: url,
     method: 'GET',
@@ -208,7 +208,7 @@ map.search.init = function (key) {
     });
 }
 map.search.findPlaces = function (key) {
-  const searchTerm = map.search.$searchInput.val();
+  var searchTerm = map.search.$searchInput.val();
   $.ajax({
     url: `/api/locations/places/keyword`,
     type: 'POST',
@@ -231,9 +231,9 @@ map.markers = [];
 
 
 map.search.renderPlaceOptions = function (places, key) {
-  const $results = $('.results').empty();
+  var $results = $('.results').empty();
   places.forEach(function (place) {
-    const $placeContainer = $('<div>', {
+    var $placeContainer = $('<div>', {
         class: 'place-option'
       })
       .appendTo($results)
@@ -241,21 +241,21 @@ map.search.renderPlaceOptions = function (places, key) {
         map.getPlace(key, place.geometry.location, place.place_id);
         $('.results').empty();
       });
-    const $placeIcon = $('<img>', {
+    var $placeIcon = $('<img>', {
         src: '/img/marker.svg',
         class: 'place-option-icon'
       })
       .appendTo($placeContainer);
-    const $placeText = $('<p>', {
+    var $placeText = $('<p>', {
         class: 'place-option-text'
       })
       .appendTo($placeContainer);
-    const $placeName = $('<span>', {
+    var $placeName = $('<span>', {
         class: 'place-option-name'
       })
       .text(place.name)
       .appendTo($placeText);
-    const $placeAdress = $('<span>', {
+    var $placeAdress = $('<span>', {
         class: 'place-option-address'
       })
       .text(place.vicinity)
@@ -294,7 +294,7 @@ map.setLocation = function (location, name, placeId) {
   //http://jsfiddle.net/s6Dyp/18/
 map.setStaticSrc = function (lat, lng, key) {
   console.log(lat, lng, key);
-  let src = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&zoom=16&center=${lat},${lng}&format=png&markers=color:red%7C${lat},${lng}&key=${key}&style=feature:administrative|element:labels.text.fill|color:0x444444&style=feature:landscape|element:all|color:0xf2f2f2&style=feature:landscape|element:geometry.fill|hue:0x00ffd6|saturation:11|weight:1.00|lightness:-4&style=feature:landscape.man_made|element:geometry.fill|lightness:0&style=feature:poi|element:all|visibility:off&style=feature:poi.park|element:geometry.fill|visibility:on|hue:0x00ffb2&style=feature:road|element:all|saturation:-100|lightness:45&style=feature:road.highway|element:all|visibility:simplified&style=feature:road.arterial|element:labels.icon|visibility:off&style=feature:transit|element:all|visibility:off&style=feature:water|element:all|color:0x54babe|visibility:on&style=feature:water|element:geometry.fill|saturation:-19|lightness:12`
+  var src = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&zoom=16&center=${lat},${lng}&format=png&markers=color:red%7C${lat},${lng}&key=${key}&style=feature:administrative|element:labels.text.fill|color:0x444444&style=feature:landscape|element:all|color:0xf2f2f2&style=feature:landscape|element:geometry.fill|hue:0x00ffd6|saturation:11|weight:1.00|lightness:-4&style=feature:landscape.man_made|element:geometry.fill|lightness:0&style=feature:poi|element:all|visibility:off&style=feature:poi.park|element:geometry.fill|visibility:on|hue:0x00ffb2&style=feature:road|element:all|saturation:-100|lightness:45&style=feature:road.highway|element:all|visibility:simplified&style=feature:road.arterial|element:labels.icon|visibility:off&style=feature:transit|element:all|visibility:off&style=feature:water|element:all|color:0x54babe|visibility:on&style=feature:water|element:geometry.fill|saturation:-19|lightness:12`
   $('.static-map').attr('src', src);
   console.log(src);
 }

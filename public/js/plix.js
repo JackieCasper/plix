@@ -1,12 +1,12 @@
-const Plix = {};
+var Plix = {};
 
 Plix.renderPlixList = function (plixes) {
-  const $plixContainer = $('.plix-container').empty();
+  var $plixContainer = $('.plix-container').empty();
   if (plixes.plix) {
     plixes = plixes.plix;
   }
   plixes.forEach(function (plix) {
-    const $plixThumb = $('<a>', {
+    var $plixThumb = $('<a>', {
         href: `/plix/${plix.username}/${plix.id}`,
         class: 'plix-list-item'
       })
@@ -19,7 +19,7 @@ Plix.renderPlixList = function (plixes) {
 
 Plix.getNearbyPlix = function (lat, lng, distance) {
   console.log(map.currentPlace);
-  const nearbyReqData = {
+  var nearbyReqData = {
     lat, lng, distance
   };
   $.ajax({

@@ -1,4 +1,4 @@
-const Nav = {};
+var Nav = {};
 Nav.links = [
   {
     href: '/user/profile',
@@ -43,46 +43,46 @@ Nav.links = [
 
 Nav.init = function () {
   console.log(window.location);
-  const $sideNav = $('<nav>', {
+  var $sideNav = $('<nav>', {
       class: 'side-nav'
     })
     .prependTo($('body'));
   Nav.links.forEach(function (link) {
-    const $link = $('<a>', {
+    var $link = $('<a>', {
         href: link.href,
         class: 'nav-link'
       })
       .addClass(link.active)
       .appendTo($sideNav);
-    const $icon = $('<div>', {
+    var $icon = $('<div>', {
         class: 'nav-icon ' + link.imgClass
       })
       .appendTo($link);
-    const $text = $('<p>', {
+    var $text = $('<p>', {
         class: 'nav-text'
       })
       .text(link.text)
       .appendTo($link);
   });
-  const $topNav = $('<nav>', {
+  var $topNav = $('<nav>', {
       class: 'top-nav'
     })
     .prependTo($('body'));
-  const $menuIcon = $('<div>', {
+  var $menuIcon = $('<div>', {
       class: 'menu-icon'
     })
     .click(function () {
       $('.side-nav').toggleClass('show');
     })
     .appendTo($topNav);
-  const $h1Link = $('<a>', {
+  var $h1Link = $('<a>', {
       href: '/'
     })
     .appendTo($topNav);
-  const $h1 = $('<h1>')
+  var $h1 = $('<h1>')
     .text('Plix')
     .appendTo($h1Link);
-  const $newPlix = $('<a>', {
+  var $newPlix = $('<a>', {
       href: '/plix/new',
       class: 'new-plix-icon'
     })

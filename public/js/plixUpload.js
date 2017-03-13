@@ -1,6 +1,6 @@
 //https://devcenter.heroku.com/articles/s3-upload-node
 
-const plixUpload = {};
+var plixUpload = {};
 
 //http://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
 plixUpload.validate = function (input) {
@@ -19,7 +19,7 @@ plixUpload.validate = function (input) {
 }
 
 plixUpload.descriptionCheck = function () {
-  const $description = $('.plix-description');
-  const $descriptionLength = $('.description-length').text($description.val().length);
+  var $description = $('.plix-description');
+  var $descriptionLength = $('.description-length').text($description.val().length);
 
 }
