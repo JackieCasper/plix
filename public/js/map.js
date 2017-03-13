@@ -1,5 +1,4 @@
 const map = {};
-let autocomplete = {};
 const styles = [
   {
     "featureType": "administrative",
@@ -133,14 +132,13 @@ const styles = [
 ];
 
 // init the map
-map.init = (key, location) => {
+map.init = (key, location, placeId) => {
 
   const defaultLocation = {
-    center: {
-      lat: 40.739838299999995,
-      lng: -73.9895757
-    },
-    zoom: 16
+
+    lat: 40.739838299999995,
+    lng: -73.9895757
+
   };
 
 
@@ -168,10 +166,14 @@ map.init = (key, location) => {
     });
   } else {
     location = location || defaultLocation;
-    mapOptions.center = location.center;
-    mapOptions.zoom = location.zoom;
+    mapOptions.center = location;
+
     map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    map.getPlace(key, mapOptions.center);
+    if (placeId) {
+      map.getPlace(key, mapOptions.center, placeId)
+    } else {
+      map.getPlace(key, mapOptions.center);
+    }
     map.search.init(key);
   }
 };

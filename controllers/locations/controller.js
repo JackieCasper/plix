@@ -11,11 +11,17 @@ controller.renderLocationSearch = (req, res) => {
   });
 };
 
-
-
-
-
-
+controller.showLocation = (req, res) => {
+  Locations
+    .findById(req.params.id)
+    .then(data => {
+      res.render('location/index', {
+        location: data,
+        placesKey: process.env.PLACES_KEY
+      });
+    })
+    .catch(err => console.log(err))
+}
 
 
 module.exports = controller;

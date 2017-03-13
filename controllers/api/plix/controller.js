@@ -3,13 +3,6 @@ const passport = require('passport');
 // set up the controller
 const controller = {};
 
-controller.findById = (req, res) => {
-
-}
-
-controller.create = (req, res) => {
-
-}
 
 
 // secure
@@ -38,12 +31,5 @@ controller.delete = (req, res) => {
     .catch(err => console.log(err));
 }
 
-controller.getSignedUrl = (req, res) => {
-
-}
-
-controller.createThumb = (req, res) => {
-
-}
 
 module.exports = controller;

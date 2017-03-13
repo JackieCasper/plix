@@ -5,6 +5,9 @@ const fetch = require('node-fetch');
 const placesKey = process.env.PLACES_KEY;
 const Location = {};
 
+Location.findById = (id) => {
+  return db.one('SELECT place_id, lat, lng FROM locations WHERE id=$1', [id]);
+}
 
 Location.create = (placeId, address, lat, lng) => {
   return db.one('INSERT INTO locations (place_id, address, lat, lng) VALUES ($1, $2, $3, $4) RETURNING id', [placeId, address, lat, lng]);
@@ -24,8 +27,6 @@ Location.findNearby = (lat, lng, distance) => {
         ORDER BY distance 
         LIMIT 20`, [lat, lng, distance]);
 }
-
-
 
 
 Location.fetchPlacesByKeyword = (lat, lng, keyword) => {
