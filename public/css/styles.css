@@ -21,7 +21,7 @@ html {
   -ms-flex-direction: column;
   -o-flex-direction: column;
   flex-direction: column;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   width: 100%;
 }
