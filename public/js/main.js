@@ -22,11 +22,15 @@ var initPage = function (key) {
   });
 
   var $plixShowImg = $('.plix-show-img');
-  $plixShowImg.load(function () {
+  $plixShowImg.one('load', function () {
     if ($plixShowImg.width() > $plixShowImg.height()) {
       $('.plix-img-container').height($plixShowImg.height());
     }
-  })
+  }).each(function () {
+    if (this.complete) {
+      $(this).load();
+    }
+  });
 
 
   var description = $('.show-description-edit').val();
