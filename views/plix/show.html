@@ -20,12 +20,25 @@
 
 <body>
 
-  <div class="container plix-show-container">
-    <a class="plix-img-container">
-      <img src="{{plix.img}}" class="plix-show-img" />
+  <div class="container plix-show-container" data-plix-id="{{plix.id}}">
+    <a class="show-info" href="/user/{{plix.username}}">
+      <div class="user show-icon"></div>
+      <p>{{plix.username}}</p>
     </a>
-    <img class="static-map">
-  </div>
+
+    <a class="plix-img-container" href="{{plix.img}}" />
+    <img src="{{plix.img}}" class="plix-show-img" />
+    </a>
+    <a class="show-info" href="/locations/{{plix.location_id}}">
+      <div class="explore show-icon"></div>
+      <p>{{plix.address}}</p>
+      <img class="static-map">
+    </a>
+    <div class="show-description-container">
+      <p class="plix-description-show">{{plix.description}}</textarea>
+
+    </div>
+
 
 
 </body>
