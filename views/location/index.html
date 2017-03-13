@@ -16,10 +16,12 @@
   <script src="/js/main.js">
   </script>
   <script>
-    $(() => initPage("{{placesKey}}", {
-      lat: '{{location.lat}}',
-      lng: '{{location.lng}}'
-    }, '{{location.place_id}}'));
+    $(document).ready(function () {
+      initPage("{{placesKey}}", {
+        lat: '{{location.lat}}',
+        lng: '{{location.lng}}'
+      }, '{{location.place_id}}')
+    });
   </script>
 </head>
 

@@ -11,7 +11,7 @@
   <script src="/js/map.js"></script>
   <script src="/js/main.js"></script>
   <script>
-    $(() => {
+    $(document).ready(function () {
       map.setStaticSrc('{{plix.lat}}', '{{plix.lng}}', '{{key}}');
       initPage('{{key}}');
     })

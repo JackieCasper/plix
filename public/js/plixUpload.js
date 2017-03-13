@@ -3,13 +3,13 @@
 const plixUpload = {};
 
 //http://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
-plixUpload.validate = (input) => {
+plixUpload.validate = function (input) {
 
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     console.log('Has Files');
 
-    reader.onload = (e) => {
+    reader.onload = function (e) {
       $('.upload-img').attr('src', e.target.result);
     }
 
@@ -18,7 +18,7 @@ plixUpload.validate = (input) => {
   }
 }
 
-plixUpload.descriptionCheck = () => {
+plixUpload.descriptionCheck = function () {
   const $description = $('.plix-description');
   const $descriptionLength = $('.description-length').text($description.val().length);
 

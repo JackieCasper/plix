@@ -1,11 +1,11 @@
 const Plix = {};
-//<a href="/plix/show/{{id}}" class="plix-list-item" style="background-image:url({{thumb}})"></a>
-Plix.renderPlixList = (plixes) => {
+
+Plix.renderPlixList = function (plixes) {
   const $plixContainer = $('.plix-container').empty();
   if (plixes.plix) {
     plixes = plixes.plix;
   }
-  plixes.forEach(plix => {
+  plixes.forEach(function (plix) {
     const $plixThumb = $('<a>', {
         href: `/plix/${plix.username}/${plix.id}`,
         class: 'plix-list-item'
@@ -17,7 +17,7 @@ Plix.renderPlixList = (plixes) => {
   })
 }
 
-Plix.getNearbyPlix = (lat, lng, distance) => {
+Plix.getNearbyPlix = function (lat, lng, distance) {
   console.log(map.currentPlace);
   const nearbyReqData = {
     lat, lng, distance
@@ -26,10 +26,12 @@ Plix.getNearbyPlix = (lat, lng, distance) => {
     url: '/api/locations/nearbyPlix',
     type: 'POST',
     data: nearbyReqData,
-    success: data => {
+    success: function (data) {
       console.log(data);
       Plix.renderPlixList(data);
     },
-    error: err => console.log('ERROR GETTING NEARBY', err)
+    error: function (err) {
+      console.log('ERROR GETTING NEARBY', err);
+    }
   })
 }

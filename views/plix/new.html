@@ -16,7 +16,9 @@
 
   <script src="/js/main.js"></script>
   <script>
-    $(() => initPage("{{placesKey}}"));
+    $(document).ready(function () {
+      initPage("{{placesKey}}")
+    });
   </script>
 </head>
 

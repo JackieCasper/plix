@@ -132,7 +132,7 @@ const styles = [
 ];
 
 // init the map
-map.init = (key, location, placeId) => {
+map.init = function (key, location, placeId) {
 
   const defaultLocation = {
 
@@ -178,13 +178,13 @@ map.init = (key, location, placeId) => {
   }
 };
 
-map.getPlace = (key, location, placeId) => {
+map.getPlace = function (key, location, placeId) {
   const url = placeId ? `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${key}` : `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`;
   $.ajax({
     url: url,
     method: 'GET',
     contentType: 'multipart/form-data',
-    success: (data) => {
+    success: function (data) {
       map.clearMarkers();
       map.setLocation(data.results[0].geometry.location, data.results[0].formatted_address, data.results[0].place_id);
       map.currentPlace = data.results[0];
@@ -192,20 +192,22 @@ map.getPlace = (key, location, placeId) => {
         Plix.getNearbyPlix(map.currentPlace.geometry.location.lat, map.currentPlace.geometry.location.lng, 1);
       }
     },
-    error: err => console.log(err)
+    error: function (err) {
+      console.log(err);
+    }
   })
 }
 
 map.search = {};
-map.search.init = (key) => {
+map.search.init = function (key) {
   map.search.$searchInput = $('#search')
-    .keyup(() => {
+    .keyup(function () {
       if (map.search.$searchInput.val()) {
         map.search.findPlaces(key);
       }
     });
 }
-map.search.findPlaces = (key) => {
+map.search.findPlaces = function (key) {
   const searchTerm = map.search.$searchInput.val();
   $.ajax({
     url: `/api/locations/places/keyword`,
@@ -215,11 +217,11 @@ map.search.findPlaces = (key) => {
       lng: map.map.getCenter().lng,
       keyword: searchTerm
     },
-    success: data => {
+    success: function (data) {
       console.log(data);
       map.search.renderPlaceOptions(data.results.slice(0, 5), key);
     },
-    error: err => {
+    error: function (err) {
       console.log(err);
     }
   });
@@ -228,14 +230,14 @@ map.search.findPlaces = (key) => {
 map.markers = [];
 
 
-map.search.renderPlaceOptions = (places, key) => {
+map.search.renderPlaceOptions = function (places, key) {
   const $results = $('.results').empty();
-  places.forEach(place => {
+  places.forEach(function (place) {
     const $placeContainer = $('<div>', {
         class: 'place-option'
       })
       .appendTo($results)
-      .click(() => {
+      .click(function () {
         map.getPlace(key, place.geometry.location, place.place_id);
         $('.results').empty();
       });
@@ -261,14 +263,14 @@ map.search.renderPlaceOptions = (places, key) => {
   });
 }
 
-map.clearMarkers = () => {
+map.clearMarkers = function () {
   map.markers.forEach(function (marker) {
     marker.setMap(null);
   });
   map.markers = [];
 }
 
-map.setLocation = (location, name, placeId) => {
+map.setLocation = function (location, name, placeId) {
     map.search.$searchInput.val(name);
     map.map.setCenter({
       lat: location.lat,
@@ -290,7 +292,7 @@ map.setLocation = (location, name, placeId) => {
 
   }
   //http://jsfiddle.net/s6Dyp/18/
-map.setStaticSrc = (lat, lng, key) => {
+map.setStaticSrc = function (lat, lng, key) {
   console.log(lat, lng, key);
   let src = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&zoom=16&center=${lat},${lng}&format=png&markers=color:red%7C${lat},${lng}&key=${key}&style=feature:administrative|element:labels.text.fill|color:0x444444&style=feature:landscape|element:all|color:0xf2f2f2&style=feature:landscape|element:geometry.fill|hue:0x00ffd6|saturation:11|weight:1.00|lightness:-4&style=feature:landscape.man_made|element:geometry.fill|lightness:0&style=feature:poi|element:all|visibility:off&style=feature:poi.park|element:geometry.fill|visibility:on|hue:0x00ffb2&style=feature:road|element:all|saturation:-100|lightness:45&style=feature:road.highway|element:all|visibility:simplified&style=feature:road.arterial|element:labels.icon|visibility:off&style=feature:transit|element:all|visibility:off&style=feature:water|element:all|color:0x54babe|visibility:on&style=feature:water|element:geometry.fill|saturation:-19|lightness:12`
   $('.static-map').attr('src', src);

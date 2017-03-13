@@ -1,4 +1,4 @@
-const initPage = (key) => {
+const initPage = function (key) {
 
   if (typeof map != 'undefined') {
     map.init(key);
@@ -9,7 +9,7 @@ const initPage = (key) => {
   }
   let $plixItem = $('.plix-list-item');
   $plixItem.height($plixItem.width());
-  $(window).resize(() => {
+  $(window).resize(function () {
     $plixItem = $('.plix-list-item');
     $plixItem.height($plixItem.width());
   })
@@ -17,7 +17,7 @@ const initPage = (key) => {
   $('#plix-img').change(function () {
     plixUpload.validate(this);
   });
-  $('.plix-description').keyup(() => {
+  $('.plix-description').keyup(function () {
     plixUpload.descriptionCheck();
   });
 
@@ -27,7 +27,7 @@ const initPage = (key) => {
   }
 
   let description = $('.show-description-edit').val();
-  $('.edit-icon').click((e) => {
+  $('.edit-icon').click(function (e) {
     const $textarea = $('.show-description-edit');
     $('.edit-icons')
       .toggleClass('editing');
@@ -37,7 +37,7 @@ const initPage = (key) => {
         .prop('readonly', false)
         .focus();
       $(e.target)
-        .one('click', (e) => {
+        .one('click', function (e) {
           const plixId = $('.plix-show-container').attr('data-plix-id');
           const editData = {
             description: $textarea.val()
@@ -46,10 +46,12 @@ const initPage = (key) => {
             url: '/api/plix/' + plixId,
             type: 'PUT',
             data: editData,
-            success: (data) => {
+            success: function (data) {
               description = $('.show-description-edit').val();
             },
-            error: err => console.log(err)
+            error: function (err) {
+              console.log(err);
+            }
           })
         })
         .text('Submit');
@@ -61,7 +63,7 @@ const initPage = (key) => {
     }
   });
 
-  $('.cancel-editing').click((e) => {
+  $('.cancel-editing').click(function (e) {
     const $textarea = $('.show-description-edit')
       .prop('readonly', true)
       .focusout()
@@ -69,15 +71,17 @@ const initPage = (key) => {
     $('.edit-icon').text('');
     $('.edit-icons').removeClass('editing');
   });
-  $('.delete-plix').one('click', () => {
+  $('.delete-plix').one('click', function () {
     const plixId = $('.plix-show-container').attr('data-plix-id');
     $.ajax({
       url: '/api/plix/' + plixId,
       type: 'DELETE',
-      success: (data) => {
+      success: function (data) {
         window.location.replace('/user/profile');
       },
-      error: err => console.log(err)
+      error: function (err) {
+        console.log(err);
+      }
     })
   })
 }

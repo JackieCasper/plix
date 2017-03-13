@@ -41,13 +41,13 @@ Nav.links = [
 //    </a>
 //  </nav>
 
-Nav.init = () => {
+Nav.init = function () {
   console.log(window.location);
   const $sideNav = $('<nav>', {
       class: 'side-nav'
     })
     .prependTo($('body'));
-  Nav.links.forEach(link => {
+  Nav.links.forEach(function (link) {
     const $link = $('<a>', {
         href: link.href,
         class: 'nav-link'
@@ -71,7 +71,7 @@ Nav.init = () => {
   const $menuIcon = $('<div>', {
       class: 'menu-icon'
     })
-    .click(() => {
+    .click(function () {
       $('.side-nav').toggleClass('show');
     })
     .appendTo($topNav);
