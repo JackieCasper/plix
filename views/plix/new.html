@@ -6,7 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plix</title>
   <link type="text/css" rel="stylesheet" href="/css/styles.css">
+  <script src="/js/jquery.js"></script>
 
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{placesKey}}&libraries=places"></script>
+
+  <script src="/js/map.js"></script>
+  <script src="/js/plixUpload.js"></script>
+  <script src="/js/nav.js"></script>
+
+  <script src="/js/main.js"></script>
+  <script>
+    $(() => initPage("{{placesKey}}"));
+  </script>
 </head>
 
 <body>
@@ -25,25 +36,14 @@
       <input type="file" name="image" id="plix-img" accept="image/gif,image/jpeg,image/x-png," required />
       <div class="plix-description-container">
         <!-- max length: https://www.w3schools.com/tags/att_textarea_maxlength.asp-->
-        <textarea name="description" maxlength="255" id="plix-description" class="plix-description" required></textarea>
+        <textarea placeholder="Description" name="description" maxlength="255" id="plix-description" class="plix-description" required></textarea>
         <p class="description-length">0</p>
       </div>
 
       <button class="submit-plix">Share</button>
     </form>
   </div>
-  <script src="/js/jquery.js"></script>
 
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{placesKey}}&libraries=places"></script>
-
-  <script src="/js/map.js"></script>
-  <script src="/js/plixUpload.js"></script>
-  <script src="/js/nav.js"></script>
-
-  <script src="/js/main.js"></script>
-  <script>
-    $(() => initPage("{{placesKey}}"));
-  </script>
 
 </body>
 
