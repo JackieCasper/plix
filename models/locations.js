@@ -15,7 +15,7 @@ Location.create = (placeId, address, lat, lng) => {
 
 
 Location.findPlix = (id) => {
-  return db.many('SELECT * from plix WHERE location_id = $1', [id]);
+  return db.many('SELECT plix.id, plix.thumb, users.name AS username from plix JOIN users ON plix.user_id = users.id WHERE location_id = $1', [id]);
 }
 
 //https://developers.google.com/maps/articles/phpsqlsearch_v3?csw=1

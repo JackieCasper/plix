@@ -7,7 +7,7 @@ Plix.renderPlixList = (plixes) => {
   }
   plixes.forEach(plix => {
     const $plixThumb = $('<a>', {
-        href: `/plix/show/${plix.id}`,
+        href: `/plix/${plix.username}/${plix.id}`,
         class: 'plix-list-item'
       })
       .css('background-image', `url(${plix.thumb})`)
