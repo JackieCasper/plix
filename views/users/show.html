@@ -6,14 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plix</title>
   <link type="text/css" rel="stylesheet" href="/css/styles.css">
-  <script type="text/javascript" src="/js/jquery.js"></script>
 
-  <script type="text/javascript" src="/js/nav.js"></script>
-
-  <script type="text/javascript" src="/js/main.js"></script>
-  <script type="text/javascript">
-    $(() => initPage("{{placesKey}}"));
-  </script>
 </head>
 
 <body>
@@ -23,8 +16,13 @@
     {{/plix}}
   </div>
 
-  <script>
-    alert('JS WORKS AT END OF BODY')
+  <script type="text/javascript" src="/js/jquery.js"></script>
+
+  <script type="text/javascript" src="/js/nav.js"></script>
+
+  <script type="text/javascript" src="/js/main.js"></script>
+  <script type="text/javascript">
+    $(() => initPage("{{placesKey}}"));
   </script>
 </body>
 

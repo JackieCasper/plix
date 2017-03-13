@@ -6,6 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plix</title>
   <link type="text/css" rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div id="map"></div>
+    <div class="search-container">
+      <input id="search" type="text" />
+
+    </div>
+
+    <div class="results"></div>
+    <div class="plix-container"></div>
+  </div>
+
   <script src="/js/jquery.js"></script>
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{placesKey}}&libraries=places"></script>
@@ -21,20 +37,6 @@
       lng: '{{location.lng}}'
     }, '{{location.place_id}}'));
   </script>
-</head>
-
-<body>
-
-  <div class="container">
-    <div id="map"></div>
-    <div class="search-container">
-      <input id="search" type="text" />
-
-    </div>
-
-    <div class="results"></div>
-    <div class="plix-container"></div>
-  </div>
 
 </body>
 
