@@ -1,4 +1,5 @@
 const initPage = (key) => {
+  alert('I do Javascript!');
   if (typeof map != 'undefined') {
     map.init(key);
   }
