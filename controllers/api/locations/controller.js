@@ -36,7 +36,7 @@ controller.findNearby = (req, res) => {
         });
       } else {
         res.json({
-          plix: nearbyPlix;
+          plix: nearbyPlix
         })
       }
 
