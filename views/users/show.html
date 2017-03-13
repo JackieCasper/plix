@@ -22,7 +22,9 @@
 
   <script type="text/javascript" src="/js/main.js"></script>
   <script type="text/javascript">
-    $(() => initPage("{{placesKey}}"));
+    $(document).ready(function () {
+      initPage("{{placesKey}}")
+    });
   </script>
 </body>
 
