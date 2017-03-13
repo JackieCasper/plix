@@ -25,7 +25,8 @@ controller.show = (req, res) => {
         })
       } else {
         res.render('plix/show', {
-          plix: data
+          plix: data,
+          key: process.env.PLACES_KEY
         });
       }
 
