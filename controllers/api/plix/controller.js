@@ -2,10 +2,11 @@ const Plix = require('../../../models/plix');
 const passport = require('passport');
 // set up the controller
 const controller = {};
+const Images = require('../../../models/images');
 
 
 
-// secure
+
 controller.update = (req, res) => {
   const updateData = {
     id: req.params.id,

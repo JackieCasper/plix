@@ -62,7 +62,7 @@ plixUpload.validate = function (input) {
       getOrientation(input.files[0], function (orientation) {
         console.log('orientation: ' + orientation);
         var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        alert(iOS);
+        //        alert(iOS);
         imageRotation = new Rotation(orientation, iOS);
 
         var reader = new FileReader();
