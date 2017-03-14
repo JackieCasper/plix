@@ -3,10 +3,6 @@ const bcrypt = require('bcrypt');
 const db = require('../config/db');
 
 
-
-
-
-
 const User = {};
 
 User.findByEmail = (email) => {
@@ -75,7 +71,7 @@ User.findFollowing = (name, following) => {
   return db.task(t => {
     let q1;
     if (following === 'followers') {
-      q1 = t.manyOrNone('SELECT user_follows.user_id, follow_user.name AS follow_name FROM user_follows JOIN users AS follow_user ON follow_user.id = user_follows.user_id JOIN users AS users ON user_follows.follow_id = users.id WHERE users.name = $1', [name]);
+      q1 = t.manyOrNone('SELECT user_follows.user_id, follow_user.name AS follow_name FROM user_follows JOIN users AS follow_user ON follow_user.id = user_follows.user_id JOIN users AS users ON user_follows.follow_id = users.id WHERE users.name = $1 ORDER BY follow_user.name', [name]);
 
 
     } else if (following === 'following') {
@@ -90,12 +86,12 @@ User.findFollowing = (name, following) => {
 }
 
 
-User.getFeed = (id, page) => {
+User.getFeed = (id, page = 0) => {
   return db.manyOrNone('SELECT users.name AS username, plix.img AS image, plix.location_id, plix.id, locations.address FROM users AS users JOIN user_follows ON user_follows.follow_id = users.id JOIN plix ON plix.user_id = users.id JOIN locations ON locations.id = plix.location_id WHERE user_follows.user_id = $1 ORDER BY plix.plix_date DESC LIMIT 24 OFFSET $2', [id, page * 24]);
 }
 
 User.search = (keyword) => {
-  return db.manyOrNone(`SELECT name FROM users WHERE (UPPER(name) LIKE '%'||$1) OR (UPPER(name) LIKE $1||'%') LIMIT 24`, [keyword]);
+  return db.manyOrNone(`SELECT name FROM users WHERE (UPPER(name) LIKE '%'||$1) OR (UPPER(name) LIKE $1||'%') OR (UPPER(name) LIKE '%'||$1||'%') ORDER BY name LIMIT 24`, [keyword]);
 }
 
 User.setProfile = (img, name) => {

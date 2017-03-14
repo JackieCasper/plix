@@ -35,7 +35,4 @@ Plix.edit = (description, id) => {
 }
 
 
-
-
-
 module.exports = Plix;
