@@ -1,5 +1,6 @@
 body,
 html {
+  background-color: #eee;
   font-family: 'Quicksand', sans-serif;
   margin: 0 auto;
 }
@@ -39,6 +40,7 @@ button {
 }
 
 .container {
+  background-color: white;
   -ms-align-items: stretch;
   align-items: stretch;
   box-shadow: 0 0 30px rgba(0, 0, 0, .1);
@@ -370,7 +372,7 @@ form h1 {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 66;
+  z-index: 66666666666;
 }
 
 .menu-icon {
@@ -431,7 +433,7 @@ a>h1 {
   -o-flex-direction: column;
   flex-direction: column;
   height: 100vh;
-  left: -220px;
+  left: -300px;
   position: fixed;
   top: 50px;
   transition: left .5s ease;
@@ -512,6 +514,7 @@ a>h1 {
 }
 
 .plix-container {
+  background-color: white;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
@@ -909,6 +912,7 @@ a.show-info-section:hover {
 }
 
 .feed-container {
+  background-color: white;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, .1);
   display: -webkit-flex;
   display: -moz-flex;

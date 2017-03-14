@@ -134,6 +134,7 @@ var styles = [
 // init the map
 map.init = function (key, location, placeId) {
   console.log('loading map');
+  $('.search-container').hide();
   var defaultLocation = {
 
     lat: 40.739838299999995,
@@ -208,7 +209,8 @@ map.search.init = function (key) {
       if (map.search.$searchInput.val()) {
         map.search.findPlaces(key);
       }
-    });
+    })
+  $('.search-container').show();
 }
 map.search.findPlaces = function (key) {
   var searchTerm = map.search.$searchInput.val();

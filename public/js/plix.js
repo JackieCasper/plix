@@ -30,7 +30,7 @@ Plix.renderPlixList = function (plixes) {
 
   }
   if (plixes.length === 0) {
-    renderNoResults($plixContainer, 'No Plix in this area', '/pix/new', 'Share one now.')
+    renderNoResults($plixContainer, 'No Plix in this area', '/plix/new', 'Share one now.')
   } else {
     plixes.forEach(function (plix) {
       var $plixThumb = $('<a>', {
