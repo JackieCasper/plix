@@ -54,10 +54,11 @@ plixUpload.validate = function (input) {
       transform: `rotate(${this.rotation}deg)rotateX({this.flip}deg)`
     })
     if (this.rotation === 270 || this.rotation === 90) {
-      $('.upload-img').css({
-        height: labelWidth + 'px',
-        width: 'auto'
-      });
+      $('.upload-img')
+        .height(labelWidth)
+        .css({
+          width: 'auto'
+        });
     }
   }
 
