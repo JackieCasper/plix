@@ -15,32 +15,30 @@ Images.uploadAWS = (fileKey, fileType, data) => {
     ContentType: fileType,
     Key: fileKey
   }).promise()
-
 }
 
-Images.createThumb = (oldFileKey, newFileKey, fileType, width, height) => {
-  console.log('CREATING THUMB---IN MODEL');
-  S3.getObject({
-      Bucket: BUCKET,
-      Key: oldFileKey
-    }).promise()
-    .then(data => {
-      Sharp(data.Body)
-        .resize(width, height, {
-          centreSampling: true,
-        })
-        .toBuffer()
-        .then(function (buffer) {
-          console.log(buffer);
-          return S3.putObject({
-            Body: buffer,
-            Bucket: BUCKET,
-            ContentType: fileType,
-            Key: newFileKey
-          }).promise()
-        })
+Images.sizeImage = (data, width, height) => {
+  return Sharp(data)
+    .resize(width, height, {
+      centreSampling: true
     })
+    .toBuffer()
+}
 
+Images.rotateImage = (data) => {
+  return Sharp(data)
+    .rotate()
+    .toBuffer()
+}
+
+Images.createThumb = (data, fileKey, fileType, width, height) => {
+  console.log('CREATING THUMB---IN MODEL');
+  return Images
+    .sizeImage(data, width, height)
+    .then(function (buffer) {
+      console.log(buffer);
+      return Images.uploadAWS(fileKey, fileType, buffer);
+    })
 }
 
 module.exports = Images;

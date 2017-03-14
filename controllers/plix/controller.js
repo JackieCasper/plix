@@ -50,6 +50,40 @@ controller.new = (req, res) => {
   });
 }
 
+controller.createPlix = (userId, location, description, imageType, imageData, req, res) => {
+  const url = 'https://s3.amazonaws.com/jackiecasper-plix/';
+  Plix
+    .create(userId, location, description)
+    .then(createData => {
+
+      let originalFileKey = imageType.split('/');
+      originalFileKey = `${userId}-${createData.id}.${originalFileKey[originalFileKey.length-1]}`;
+      const thumbFileKey = 'thumb-' + originalFileKey;
+
+      Images
+        .rotateImage(imageData)
+        .then(buffer => {
+          imageData = buffer;
+          Images
+            .uploadAWS(originalFileKey, imageType, imageData)
+            .then(() => {
+              Images
+                .createThumb(imageData, thumbFileKey, imageType, 350, 350);
+              Plix
+                .addImg(createData.id, url + originalFileKey, url + thumbFileKey)
+                .then(imgData => {
+                  res.redirect(`/plix/${req.user.name}/${createData.id}`);
+                })
+                .catch(err => console.log('ERROR ADDING IMAGE', err))
+            })
+            .catch(err => console.log('ERROR UPLOADING IMAGE', err));
+        })
+        .catch(err => console.log('ERROR CREATING PLIX', err));
+    })
+    .catch(err => console.log('ERROR ROTATING PLIX', err));
+
+}
+
 controller.createNew = (req, res) => {
   console.log(req.files.image);
   const inputData = {
@@ -59,7 +93,7 @@ controller.createNew = (req, res) => {
     imageType: req.files.image.mimetype,
     description: req.body.description
   }
-  const url = 'https://s3.amazonaws.com/jackiecasper-plix/';
+
   Locations
     .findByPlaceId(inputData.location)
     .then(location => {
@@ -67,27 +101,8 @@ controller.createNew = (req, res) => {
       if (location) {
 
         inputData.location = location.id;
+        controller.createPlix(inputData.userId, inputData.location, inputData.description, inputData.imageType, inputData.imageData, req, res);
 
-        Plix
-          .create(inputData.userId, inputData.location, inputData.description)
-          .then(createData => {
-
-            let fileKey = inputData.imageType.split('/');
-            fileKey = `${inputData.userId}-${createData.id}.${fileKey[fileKey.length-1]}`;
-            Images
-              .uploadAWS(fileKey, inputData.imageType, inputData.imageData)
-              .then(() => {
-                Images.createThumb(fileKey, 'thumb-' + fileKey, inputData.imageType, 350, 350);
-                Plix
-                  .addImg(createData.id, url + fileKey, url + 'thumb-' + fileKey)
-                  .then(imgData => {
-                    res.redirect(`/plix/${req.user.name}/${createData.id}`);
-                  })
-                  .catch(err => console.log('ERROR ADDING IMAGE', err))
-              })
-              .catch(err => console.log('ERROR UPLOADING IMAGE', err));
-          })
-          .catch(err => console.log('ERROR CREATING PLIX', err));
       } else {
         Locations
           .fetchPlaceById(inputData.location)
@@ -106,26 +121,7 @@ controller.createNew = (req, res) => {
               .create(place.placeId, place.address, place.lat, place.lng)
               .then(locId => {
                 inputData.location = locId.id;
-                Plix
-                  .create(inputData.userId, inputData.location, inputData.description)
-                  .then(createData => {
-
-                    let fileKey = inputData.imageType.split('/');
-                    fileKey = `${inputData.userId}-${createData.id}.${fileKey[fileKey.length-1]}`;
-                    Images
-                      .uploadAWS(fileKey, inputData.imageType, inputData.imageData)
-                      .then(() => {
-                        Images.createThumb(fileKey, 'thumb-' + fileKey, inputData.imageType, 350, 350);
-                        Plix
-                          .addImg(createData.id, url + fileKey, url + 'thumb-' + fileKey)
-                          .then(imgData => {
-                            res.redirect(`/plix/${req.user.name}/${createData.id}`);
-                          })
-                          .catch(err => console.log('ERROR ADDING IMAGE', err))
-                      })
-                      .catch(err => console.log('ERROR UPLOADING IMAGE', err));
-                  })
-                  .catch(err => console.log('ERROR CREATING PLIX', err));
+                controller.createPlix(inputData.userId, inputData.location, inputData.description, inputData.imageType, inputData.imageData, req, res);
 
               })
               .catch(err => console.log('ERROR CREATING LOCATION', err));
