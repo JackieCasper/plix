@@ -51,7 +51,7 @@ plixUpload.validate = function (input) {
     }
 
     $('.upload-img').css({
-      transform: `rotate(${this.rotation}deg)rotateX({this.flip}deg)`
+      transform: `rotate(${this.rotation}deg)rotateX(${this.flip}deg)`
     })
     if (this.rotation === 270 || this.rotation === 90) {
       $('.upload-img')
