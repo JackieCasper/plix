@@ -7,11 +7,104 @@ var initPage = function (key) {
   if (typeof Nav != 'undefined') {
     Nav.init();
   }
+
+
+  var renderNoResults = function ($container, text, link, linkText) {
+    var $noContainer = $('<div>', {
+        class: 'no-result-container'
+      })
+      .appendTo($container);
+    var $noImg = $('<img>', {
+        class: 'no-result-img',
+        src: '/img/sad.svg'
+      })
+      .appendTo($noContainer);
+    var $noText = $('<p>', {
+        class: 'no-result-text'
+      })
+      .text(text)
+      .appendTo($noContainer);
+    var $noLink = $('<a>', {
+        href: link,
+        class: 'no-result-link'
+      })
+      .text(linkText)
+      .appendTo($noContainer);
+  }
+
+  var texts = ['Exploring', 'Sharing', 'Connecting'];
+  var currentText = 0;
+  var getNextText = function () {
+    currentText = currentText + 1 === texts.length ? 0 : currentText + 1;
+    return texts[currentText];
+  }
+  var rotateText = function () {
+    var $rotate = $('.rotate')
+      .addClass('rotate-out');
+    setTimeout(function () {
+      $rotate
+        .text(getNextText())
+        .removeClass('rotate-out');
+      setTimeout(function () {
+        rotateText();
+      }, 3000);
+    }, 500);
+  }
+
+  setTimeout(function () {
+    rotateText()
+  }, 3000);
+
+  $('.input-info').hide();
+
+  $('.login-input').on('focusin', function (e) {
+    $(e.target).parent().children('label').children('.input-info').show();
+  });
+
+  $('.login-input').on('focusout', function (e) {
+    $(e.target).parent().children('label').children('.input-info').hide();
+  });
+
+
+
+  var $feedContainer = $('.show-feed-container');
+  if ($feedContainer.children().length === 0) {
+    renderNoResults($feedContainer, 'No one has shared anything.', '/user/find', 'Follow more people.');
+  }
+
+  var $plixContainer = $('.plix-container');
+  if ($plixContainer.children().length === 0 && !window.location.pathname.includes('locations')) {
+    if (window.location.pathname.includes('profile')) {
+      renderNoResults($plixContainer, `You have no Plix.`, '/plix/new', 'Share one now.');
+    } else {
+      var name = $('#username').attr('data-username');
+      renderNoResults($plixContainer, `${name} has no plix.`, '/user/feed', 'Find out what others are up to.')
+    }
+  }
+  var $followButton = $('.follow-button');
+
+  $('.nofollow').parent().remove();
+  var $followContainer = $('.follow-container');
+  var $followList = $('.following-list');
+  if ($followList.children().length === 0) {
+    if ($followContainer.hasClass('following')) {
+      renderNoResults($followList, `You're not following anyone.`, '/user/find', 'Find more people');
+    } else {
+      renderNoResults($followList, `No one is following you.`);
+    }
+  }
+
+
+
+  var $feeds = $('.feed-plix');
+  $feeds.height($feeds.width());
+  $('.feed-info-container>.feed-plix').remove();
   var $plixItem = $('.plix-list-item');
   $plixItem.height($plixItem.width());
   $(window).resize(function () {
     $plixItem = $('.plix-list-item');
     $plixItem.height($plixItem.width());
+    $feeds.height($feeds.width());
   })
 
   $('#plix-img').change(function () {
@@ -31,6 +124,35 @@ var initPage = function (key) {
       $(this).load();
     }
   });
+
+
+  var addFollowClick = function () {
+    $('.follow-button').one('click', function (e) {
+      var $follow = $(e.target);
+      var followData = {
+        userId: $('#user').attr('data-user-id'),
+        followId: $follow.attr('data-follow-id'),
+        follow: ''
+      }
+      if ($follow.hasClass('following')) {
+        followData.follow = 'following';
+      }
+      $.ajax({
+        url: '/api/users/follow',
+        type: 'POST',
+        data: followData,
+        success: function (res) {
+          window.location.reload();
+        },
+        error: function (err) {
+          addFollowClick();
+          console.log(err);
+        }
+      })
+    })
+  }
+  addFollowClick();
+
 
 
   var description = $('.show-description-edit').val();

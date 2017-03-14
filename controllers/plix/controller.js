@@ -1,10 +1,12 @@
 const Plix = require('../../models/plix');
+const Images = require('../../models/images');
 const Locations = require('../../models/locations');
 const passport = require('passport');
 const AuthService = require('../../services/auth');
 // set up the controller
 const controller = {};
 var busboyPromise = require('busboy-promise');
+
 
 
 controller.show = (req, res) => {
@@ -72,10 +74,10 @@ controller.createNew = (req, res) => {
 
             let fileKey = inputData.imageType.split('/');
             fileKey = `${inputData.userId}-${createData.id}.${fileKey[fileKey.length-1]}`;
-            Plix
-              .uploadAWS(fileKey, inputData.imageData)
+            Images
+              .uploadAWS(fileKey, inputData.imageType, inputData.imageData)
               .then(() => {
-                Plix.createThumb(fileKey, inputData.imageType);
+                Images.createThumb(fileKey, 'thumb-' + fileKey, inputData.imageType, 350, 350);
                 Plix
                   .addImg(createData.id, url + fileKey, url + 'thumb-' + fileKey)
                   .then(imgData => {
@@ -110,10 +112,10 @@ controller.createNew = (req, res) => {
 
                     let fileKey = inputData.imageType.split('/');
                     fileKey = `${inputData.userId}-${createData.id}.${fileKey[fileKey.length-1]}`;
-                    Plix
-                      .uploadAWS(fileKey, inputData.imageData)
+                    Images
+                      .uploadAWS(fileKey, inputData.imageType, inputData.imageData)
                       .then(() => {
-                        Plix.createThumb(fileKey, inputData.imageType);
+                        Images.createThumb(fileKey, 'thumb-' + fileKey, inputData.imageType, 350, 350);
                         Plix
                           .addImg(createData.id, url + fileKey, url + 'thumb-' + fileKey)
                           .then(imgData => {

@@ -5,27 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plix</title>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
-<body>
-  <h1>Plix</h1>
-  <form class="login-form" method="post" action="/user/login" enctype="multipart/form-data">
-    <h2>Login</h2>
-    <p class="error">{{message}}</p>
-    <div class="login-input-container">
-      <label class="login-label" for="email">Email</label>
-      <input required class="login-input" type="email" name="email" id="email">
-      <p class="input-error"></p>
-    </div>
-    <div class="login-input-container">
-      <label class="login-label" for="password">Password</label>
-      <input required class="login-input" type="password" name="password" id="password">
-      <p class="input-error"></p>
-    </div>
-    <button class="login-button" id="login">Login</button>
-    <button class="login-button" id="cancel">Cancel</button>
+<body class="login">
 
-  </form>
+  <div class="landing-container">
+    <form class="login-form" method="post" action="/user/login" enctype="multipart/form-data">
+      <h1>Plix</h1>
+      <p class="error">{{error}}</p>
+      <div class="login-input-container">
+        <label class="login-label" for="email">Email</label>
+        <input required class="login-input" type="email" name="email" id="email">
+        <p class="input-error"></p>
+      </div>
+      <div class="login-input-container">
+        <label class="login-label" for="password">Password</label>
+        <input required class="login-input" type="password" name="password" id="password">
+        <p class="input-error"></p>
+      </div>
+      <button class="login-button" id="login">Login</button>
+      <p class="already">Don't have an account? <a href="/" class="already-link">Sign Up.</a></p>
+
+    </form>
+  </div>
 </body>
 
 </html>

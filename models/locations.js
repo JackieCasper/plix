@@ -21,7 +21,7 @@ Location.findPlix = (id) => {
 //https://developers.google.com/maps/articles/phpsqlsearch_v3?csw=1
 Location.findNearby = (lat, lng, distance) => {
   return db.manyOrNone(`
-        SELECT ( 3959 * ACOS( COS( RADIANS($1) ) * COS( RADIANS( locations.lat ) ) * COS( RADIANS( locations.lng ) - RADIANS($2) ) + SIN( RADIANS($1) ) * SIN( RADIANS( locations.lat ) ) ) ) AS distance, locations.place_id, locations.address, locations.lat, locations.lng, plix.id, plix.thumb, users.name AS username FROM plix JOIN users ON users.id = plix.user_id JOIN locations ON locations.id = plix.location_id WHERE ( 3959 * ACOS( COS( RADIANS($1) ) * COS( RADIANS( locations.lat ) ) * COS( RADIANS( locations.lng ) - RADIANS($2) ) + SIN( RADIANS($1) ) * SIN( RADIANS( locations.lat ) ) ) ) < $3 ORDER BY distance LIMIT 20`, [lat, lng, distance]);
+        SELECT ( 3959 * ACOS( COS( RADIANS($1) ) * COS( RADIANS( locations.lat ) ) * COS( RADIANS( locations.lng ) - RADIANS($2) ) + SIN( RADIANS($1) ) * SIN( RADIANS( locations.lat ) ) ) ) AS distance, locations.place_id, locations.address, locations.lat, locations.lng, plix.id, plix.thumb, users.name AS username FROM plix JOIN users ON users.id = plix.user_id JOIN locations ON locations.id = plix.location_id WHERE ( 3959 * ACOS( COS( RADIANS($1) ) * COS( RADIANS( locations.lat ) ) * COS( RADIANS( locations.lng ) - RADIANS($2) ) + SIN( RADIANS($1) ) * SIN( RADIANS( locations.lat ) ) ) ) < $3 ORDER BY distance, plix.plix_date LIMIT 48`, [lat, lng, distance]);
 }
 
 

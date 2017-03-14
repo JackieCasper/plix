@@ -1,10 +1,22 @@
 var Nav = {};
 Nav.links = [
   {
+    href: '/user/feed',
+    imgClass: 'home',
+    text: 'Home',
+    active: window.location.pathname.includes('feed') ? 'active' : ''
+  },
+  {
     href: '/user/profile',
-    imgClass: 'user',
+    imgClass: 'image',
     text: 'My Plix',
     active: window.location.pathname.includes('profile') ? 'active' : ''
+  },
+  {
+    href: '/user/find',
+    imgClass: 'user',
+    text: 'Find People',
+    active: window.location.pathname.includes('find') ? 'active' : ''
   },
   {
     href: '/locations',

@@ -133,7 +133,7 @@ var styles = [
 
 // init the map
 map.init = function (key, location, placeId) {
-
+  console.log('loading map');
   var defaultLocation = {
 
     lat: 40.739838299999995,
@@ -179,12 +179,14 @@ map.init = function (key, location, placeId) {
 };
 
 map.getPlace = function (key, location, placeId) {
+  console.log('getting place');
   var url = placeId ? `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${key}` : `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${key}`;
   $.ajax({
     url: url,
     method: 'GET',
     contentType: 'multipart/form-data',
     success: function (data) {
+      console.log('place got');
       map.clearMarkers();
       map.setLocation(data.results[0].geometry.location, data.results[0].formatted_address, data.results[0].place_id);
       map.currentPlace = data.results[0];
@@ -200,6 +202,7 @@ map.getPlace = function (key, location, placeId) {
 
 map.search = {};
 map.search.init = function (key) {
+  console.log('search init');
   map.search.$searchInput = $('#search')
     .keyup(function () {
       if (map.search.$searchInput.val()) {
@@ -230,8 +233,10 @@ map.search.findPlaces = function (key) {
 map.markers = [];
 
 
+
 map.search.renderPlaceOptions = function (places, key) {
   var $results = $('.results').empty();
+
   places.forEach(function (place) {
     var $placeContainer = $('<div>', {
         class: 'place-option'
@@ -261,6 +266,8 @@ map.search.renderPlaceOptions = function (places, key) {
       .text(place.vicinity)
       .appendTo($placeText);
   });
+
+
 }
 
 map.clearMarkers = function () {
@@ -271,6 +278,7 @@ map.clearMarkers = function () {
 }
 
 map.setLocation = function (location, name, placeId) {
+    console.log('setting location');
     map.search.$searchInput.val(name);
     map.map.setCenter({
       lat: location.lat,

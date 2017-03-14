@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plix</title>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="/css/styles.css">
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/js/nav.js"></script>
+  <script src="/js/search.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      initPage("{{placesKey}}")
+    });
+  </script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="search-container">
+      <input id="search" type="text" placeholder="Find People" />
+    </div>
+    <div class="search-results">
+
+    </div>
+  </div>
+</body>
+
+</html>

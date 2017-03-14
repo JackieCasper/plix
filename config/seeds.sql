@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS user_follows;
 DROP TABLE IF EXISTS locations CASCADE;
 DROP TABLE IF EXISTS plix;
 
@@ -6,7 +7,14 @@ CREATE TABLE users (
   id BIGSERIAL PRIMARY KEY,
   email VARCHAR NOT NULL UNIQUE,
   name VARCHAR NOT NULL UNIQUE,
-  password_digest VARCHAR NOT NULL
+  password_digest VARCHAR NOT NULL,
+  profile_img VARCHAR
+);
+
+CREATE TABLE user_follows (
+  id BIGSERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+  follow_id INT REFERENCES users(id) ON DELETE CASCADE NOT NULL
 );
 
 CREATE TABLE locations (

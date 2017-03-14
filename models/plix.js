@@ -2,9 +2,9 @@ const bcrypt = require('bcrypt');
 
 const db = require('../config/db');
 const aws = require('aws-sdk');
-var S3 = new aws.S3();
-var Sharp = require('sharp');
-var BUCKET = process.env.S3_BUCKET;
+const S3 = new aws.S3();
+const Sharp = require('sharp');
+const BUCKET = process.env.S3_BUCKET;
 
 
 const Plix = {};
@@ -36,41 +36,7 @@ Plix.edit = (description, id) => {
 
 
 
-Plix.uploadAWS = (fileKey, data) => {
-  return S3.putObject({
-    Body: data,
-    Bucket: BUCKET,
-    ContentType: 'png',
-    Key: fileKey
-  }).promise()
 
-}
-
-Plix.createThumb = (fileKey, fileType) => {
-  console.log('CREATING THUMB---IN MODEL');
-  S3.getObject({
-      Bucket: BUCKET,
-      Key: fileKey
-    }).promise()
-    .then(data => {
-      console.log('BEFORE SHARP DATA', data);
-      Sharp(data.Body)
-        .resize(350, 350, {
-          centreSampling: true,
-        })
-        .toBuffer()
-        .then(function (buffer) {
-          console.log(buffer);
-          return S3.putObject({
-            Body: buffer,
-            Bucket: BUCKET,
-            ContentType: fileType,
-            Key: 'thumb-' + fileKey
-          }).promise()
-        })
-    })
-
-}
 
 
 module.exports = Plix;

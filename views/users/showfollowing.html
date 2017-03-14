@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plix</title>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="/css/styles.css">
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/js/nav.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      initPage("{{placesKey}}")
+    });
+  </script>
+</head>
+
+<body>
+  <div class="feed-container">
+    <div class="show-info">
+      <a class="show-info-section" href="/user/{{name}}">
+        <div class="user show-icon"></div>
+        <p id="user" data-user-id="{{userId}}">{{name}}</p>
+      </a>
+      <div class="show-info-section">
+        <div class="follow-button {{follow.class}}" data-follow-id="{{follow.followid}}"></div>
+      </div>
+
+    </div>
+    <div class="follow-container {{followClass}}">
+      <nav class="follow-nav">
+        <a id="nav-following" href="/user/{{name}}/following">Following ({{followingCount}})</a>
+        <a id="nav-followers" href="/user/{{name}}/followers">Followers ({{followerCount}})</a>
+      </nav>
+      <div class="following-list">
+        {{#following}}
+        <a class="show-info list-show" href="/user/{{follow_name}}">
+          <div class="user show-icon"></div>
+          <p>{{follow_name}}</p>
+        </a>
+        {{/following}}
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

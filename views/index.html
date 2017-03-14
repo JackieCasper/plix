@@ -5,12 +5,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plix</title>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/signup.js"></script>
+  <script src="/js/main.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      initPage("{{placesKey}}")
+    });
+  </script>
 </head>
 
-<body>
-  <h1>Plix</h1>
-  <a href="/user/login">Login</a>
-  <a href="/user/signup">Sign Up</a>
+<body class="landing">
+  <div class="landing-container">
+
+    <form class="signup-form" method="post" action="/user/new" enctype="multipart/form-data">
+      <h1>Plix</h1>
+      <h2>Start <span class="rotate">Exploring</span></h2>
+      <div class="login-input-container">
+        <label class="login-label" for="email">Email <span class="input-info">&#9888; Must be a valid email</span></label>
+        <input required class="login-input" type="email" name="email" id="email">
+        <p class="input-error" id="email-error"></p>
+      </div>
+      <div class="login-input-container">
+        <label class="login-label" for="name">Username <span class="input-info">&#9888; No spaces or special characters.</span></label>
+        <input pattern="^\S+\w{2,32}\S" required class="login-input" type="text" name="name" id="name">
+        <p class="input-error" id="name-error"></p>
+      </div>
+      <div class="login-input-container">
+        <label class="login-label" for="password">Password <span class="input-info">&#9888; At least 6 characters long.</span></label>
+        <input pattern=".{6,}" title="Six or more characters" required class="login-input" type="password" name="password" id="password">
+        <p class="input-error" id="password-error"></p>
+      </div>
+      <button class="login-button" id="login">Sign Up</button>
+      <p class="already">Already a user? <a href="/user/login" class="already-link">Login</a></p>
+    </form>
+  </div>
+
+
+
+
+
 </body>
 
 </html>

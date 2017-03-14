@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plix</title>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="/css/styles.css">
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/js/nav.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      initPage("{{placesKey}}")
+    });
+  </script>
+</head>
+
+<body>
+  <div class="feed-container">
+    <div class="show-info">
+      <div class="show-info-section">
+        <div class="user show-icon"></div>
+        <p id="user" data-user-id="{{userId}}">{{name}}</p>
+      </div>
+
+    </div>
+    <nav class="follow-nav">
+      <a id="nav-following" href="/user/{{name}}/following">Following ({{followingCount}})</a>
+      <a id="nav-followers" href="/user/{{name}}/followers">Followers ({{followerCount}})</a>
+    </nav>
+    <div class="show-feed-container">
+      {{#plix}}
+      <a class="feed-plix" style="background-image:url({{image}})" href="/plix/{{username}}/{{id}}">
+        <div class="feed-info-container">
+          <a class="feed-info" href="/user/{{username}}">
+            <div class="feed-icon user"></div>
+            <p class="feed-text">{{username}}</p>
+          </a>
+          <a class="feed-info" href="/locations/{{location_id}}">
+            <div class="feed-icon explore"></div>
+            <p class="feed-text">{{address}}</p>
+          </a>
+        </div>
+      </a>
+      {{/plix}}
+    </div>
+  </div>
+
+</body>
+
+</html>

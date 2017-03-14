@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Plix</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link href="/css/styles.css" type="text/css" rel="stylesheet">
   <script src="/js/jquery.js"></script>
   <script src="/js/nav.js"></script>
@@ -21,7 +22,7 @@
 <body>
 
   <div class="container plix-show-container" data-plix-id="{{plix.id}}">
-    <a class="show-info" href="/user/{{plix.username}}">
+    <a id="username" data-name="{{plix.username}}" class="show-info" href="/user/{{plix.username}}">
       <div class="user show-icon"></div>
       <p>{{plix.username}}</p>
     </a>

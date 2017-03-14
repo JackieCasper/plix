@@ -5,31 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plix</title>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/signup.js"></script>
 </head>
 
 <body>
   <h1>Plix</h1>
   <form class="signup-form" method="post" action="/user/new" enctype="multipart/form-data">
-    <h2>Login</h2>
-    <div class="login-input-container">
-      <label class="login-label" for="email">Email</label>
-      <input required class="login-input" type="email" name="email" id="email">
-      <p class="input-error"></p>
-    </div>
-    <div class="login-input-container">
-      <label class="login-label" for="name">Username</label>
-      <input required class="login-input" type="text" name="name" id="name">
-      <p class="input-error"></p>
-    </div>
-    <div class="login-input-container">
-      <label class="login-label" for="password">Password</label>
-      <input required class="login-input" type="password" name="password" id="password">
-      <p class="input-error"></p>
-    </div>
-    <button class="login-button" id="login">Sign Up</button>
-    <button class="login-button" id="cancel">Cancel</button>
+  <h2>Sign Up</h2>
+  <div class="login-input-container">
+    <label class="login-label" for="email">Email</label>
+    <input required class="login-input" type="email" name="email" id="email">
+    <p class="input-error"></p>
+  </div>
+  <div class="login-input-container">
+    <label class="login-label" for="name">Username</label>
+    <input pattern="^\S+\w{2,32}\S" required class="login-input" type="text" name="name" id="name">
+    <p class="input-error"></p>
+  </div>
+  <div class="login-input-container">
+    <label class="login-label" for="password">Password</label>
+    <input pattern=".{6,}" title="Six or more characters" required class="login-input" type="password" name="password" id="password">
+    <p class="input-error"></p>
+  </div>
+  <button class="login-button" id="login">Sign Up</button>
+  <a class="login-cancel" href="/" id="cancel">Cancel</a>
 
-  </form>
+</form>
 </body>
 
 </html>

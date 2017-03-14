@@ -1,9 +1,9 @@
-//const dotenv = require('dotenv');
-//dotenv.load();
+const dotenv = require('dotenv');
+dotenv.load();
 
 const express = require('express');
 const logger = require('morgan');
-//const bodyParser = require('body-parser');
+
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -43,10 +43,6 @@ app.use(passport.session({
 }));
 
 app.use(logger('dev'));
-
-//app.use(bodyParser.urlencoded({
-//  extended: true
-//}));
 
 app.use(cookieParser());
 
@@ -110,7 +106,9 @@ passport.use(
       })
       .catch((err) => {
         console.log('ERROR:', err);
-        return done(null, false);
+        return done(null, false, {
+          message: 'Error creating user'
+        });
       });
   })
 );
