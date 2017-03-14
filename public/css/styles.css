@@ -61,6 +61,39 @@ button {
   width: 100%;
 }
 
+.profile-img-container {
+  background-color: #777;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  padding: 20px 10px;
+}
+
+#make-profile {
+  cursor: pointer;
+}
+
+.is-profile {
+  background-color: #449093;
+  cursor: default;
+}
+
+#make-profile:hover {
+  background-color: #54babe;
+}
+
+.profile-img {
+  height: 300px;
+  width: 300px;
+}
+
 .landing-container {
   display: -webkit-flex;
   display: -moz-flex;
@@ -405,7 +438,7 @@ form h1 {
 }
 
 a>h1 {
-  margin: 0 auto;
+  margin: 0 0 0 15px;
 }
 
 .new-plix-icon {
@@ -887,10 +920,13 @@ a.show-info-section:hover {
 }
 
 .following-list>.show-info {
-  background-color: #555;
+  border-bottom: 1px solid #aaa;
+  background-color: #eee;
+  color: #444;
 }
 
 .list-show>.show-icon {
+  background-image: url(/img/user-dark.svg);
   margin-left: 20px;
 }
 
@@ -909,6 +945,11 @@ a.show-info-section:hover {
 
 .following-list>.show-info:hover {
   background-color: #54babe;
+  color: white;
+}
+
+.list-show:hover>.show-icon {
+  background-image: url(/img/user.svg);
 }
 
 .feed-container {

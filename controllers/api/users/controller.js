@@ -178,4 +178,16 @@ controller.search = (req, res) => {
     })
 }
 
+controller.setProfile = (req, res) => {
+  Users
+    .setProfile(req.body.img, req.params.name)
+    .then(() => {
+      res.send('profile set');
+    })
+    .catch(err => {
+      console.log(err);
+      res.send('profile not set');
+    })
+}
+
 module.exports = controller;

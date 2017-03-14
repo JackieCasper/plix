@@ -34,7 +34,9 @@ Plix.edit = (description, id) => {
   return db.one('UPDATE plix SET description = $1 WHERE id = $2 RETURNING *', [description, id]);
 }
 
-
+Plix.like = (userId, plixId) => {
+  return db.none('INSERT INTO plix_likes (user_id, plix_id, like_combo) VALUES ($1, $2, $3)', [userId, plixId, `${userId},${plixId}`]);
+}
 
 
 

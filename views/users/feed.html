@@ -19,13 +19,13 @@
 
 <body>
   <div class="feed-container">
-    <div class="show-info">
+    <a class="show-info" href="/user/profile">
       <div class="show-info-section">
         <div class="user show-icon"></div>
         <p id="user" data-user-id="{{userId}}">{{name}}</p>
       </div>
 
-    </div>
+    </a>
     <nav class="follow-nav">
       <a id="nav-following" href="/user/{{name}}/following">Following ({{followingCount}})</a>
       <a id="nav-followers" href="/user/{{name}}/followers">Followers ({{followerCount}})</a>

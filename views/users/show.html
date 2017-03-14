@@ -19,14 +19,20 @@
 
 <body>
   <div class="container">
+
+
     <div class="show-info">
-      <div class="show-info-section">
+      <div class="show-info-section" href="/user/{{name}}">
         <div class="user show-icon"></div>
         <p id="user" data-user-id="{{userId}}">{{name}}</p>
       </div>
       <div class="show-info-section">
         <div class="follow-button {{follow.class}}" data-follow-id="{{follow.followid}}"></div>
       </div>
+
+    </div>
+    <div class="profile-img-container">
+      <a class="profile-link"><img src="{{photo}}" class="profile-img" /></a>
     </div>
     <nav class="follow-nav">
       <a id="nav-following" href="/user/{{name}}/following">Following ({{followingCount}})</a>

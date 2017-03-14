@@ -22,13 +22,20 @@
 <body>
 
   <div class="container plix-show-container" data-plix-id="{{plix.id}}">
-    <a id="username" data-name="{{plix.username}}" class="show-info" href="/user/{{plix.username}}">
-      <div class="user show-icon"></div>
-      <p>{{plix.username}}</p>
-    </a>
+    <div class="show-info">
+      <a id="username" data-name="{{plix.username}}" class="show-info-section" href="/user/{{plix.username}}">
+        <div class="user show-icon"></div>
+        <p>{{plix.username}}</p>
+      </a>
+      <div class="show-info-section {{profileClass}}" id="make-profile">
+        {{profileText}}
+      </div>
+    </div>
+
+
 
     <a class="plix-img-container" href="{{plix.img}}" />
-    <img src="{{plix.img}}" class="plix-show-img" />
+    <img data-thumb="{{plix.thumb}}" src="{{plix.img}}" class="plix-show-img" />
     </a>
     <a class="show-info" href="/locations/{{plix.location_id}}">
       <div class="explore show-icon"></div>

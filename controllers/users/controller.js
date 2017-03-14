@@ -38,7 +38,7 @@ controller.showNew = (req, res) => {
 
 controller.new = passport.authenticate(
   'local-signup', {
-    failureRedirect: '/user/signup',
+    failureRedirect: '/',
     successRedirect: '/user/feed',
     failureFlash: true
   }
@@ -58,7 +58,9 @@ controller.showProfile = (req, res) => {
       console.log(data);
       const renderData = {
         name: name,
+        photo: req.user.profile_img,
         plix: data[1],
+        userId: req.user.id,
         follow: {
           class: 'nofollow',
           followid: 0
@@ -95,6 +97,7 @@ controller.showUser = (req, res) => {
         const renderData = {
           name: name,
           userId: req.user.id,
+          photo: plix[0].profile_img,
           plix: plix[1],
         }
         Users

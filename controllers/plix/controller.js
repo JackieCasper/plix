@@ -21,14 +21,21 @@ controller.show = (req, res) => {
       console.log('GOT PLIX');
       console.log(data);
       if (thisUsername === plixUsername) {
-        res.render('plix/show-user', {
+        const renderData = {
           plix: data,
-          key: process.env.PLACES_KEY
-        })
+          key: process.env.PLACES_KEY,
+          profileClass: '',
+          profileText: 'Make Profile Image'
+        }
+        if (data.thumb === req.user.profile_img) {
+          renderData.profileClass = 'is-profile';
+          renderData.profileText = 'Profile Image';
+        }
+        res.render('plix/show-user', renderData)
       } else {
         res.render('plix/show', {
           plix: data,
-          key: process.env.PLACES_KEY
+          key: process.env.PLACES_KEY,
         });
       }
 

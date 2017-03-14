@@ -2,6 +2,11 @@ const bcrypt = require('bcrypt');
 
 const db = require('../config/db');
 
+
+
+
+
+
 const User = {};
 
 User.findByEmail = (email) => {
@@ -28,9 +33,9 @@ User.exists = (name, email) => {
 }
 
 User.create = (email, name, password) => {
-  console.log(password);
+  const defaultPhoto = '/img/defaultprofile.png';
   const passwordDigest = bcrypt.hashSync(password, 10);
-  return db.oneOrNone('INSERT INTO users (email, name, password_digest) VALUES ($1, $2, $3) RETURNING *', [email.toUpperCase(), name, passwordDigest]);
+  return db.oneOrNone('INSERT INTO users (email, name, password_digest, profile_img) VALUES ($1, $2, $3, $4) RETURNING *', [email.toUpperCase(), name, passwordDigest, defaultPhoto]);
 }
 
 User.findName = (email) => {
@@ -39,7 +44,7 @@ User.findName = (email) => {
 
 User.findPlixByName = (name) => {
   return db.task(t => {
-    const q1 = t.oneOrNone('SELECT id FROM users WHERE users.name = $1', [name]);
+    const q1 = t.oneOrNone('SELECT id, profile_img FROM users WHERE users.name = $1', [name]);
     const q2 = t.manyOrNone('SELECT plix.id, plix.thumb FROM plix JOIN users ON plix.user_id = users.id WHERE users.name = $1 ORDER BY plix.plix_date LIMIT 48', [name]);
     return t.batch([q1, q2])
   });
@@ -91,6 +96,10 @@ User.getFeed = (id, page) => {
 
 User.search = (keyword) => {
   return db.manyOrNone(`SELECT name FROM users WHERE (UPPER(name) LIKE '%'||$1) OR (UPPER(name) LIKE $1||'%') LIMIT 24`, [keyword]);
+}
+
+User.setProfile = (img, name) => {
+  return db.none('UPDATE users SET profile_img = $1 WHERE name = $2', [img, name]);
 }
 
 

@@ -1,12 +1,40 @@
 var initPage = function (key) {
 
-  if (typeof map != 'undefined') {
+  if (typeof map != 'undefined' && typeof google != 'undefined') {
     map.init(key);
   }
 
   if (typeof Nav != 'undefined') {
     Nav.init();
   }
+
+
+  var setProfileImage = function () {
+    var username = $('#username').attr('data-name');
+    var thumb = $('.plix-show-img').attr('data-thumb');
+    $.ajax({
+      url: `/api/users/${username}/setprofile`,
+      type: 'POST',
+      data: {
+        img: thumb
+      },
+      success: function (res) {
+        $('#make-profile')
+          .addClass('is-profile')
+          .text('Profile Image');
+      },
+      error: function (err) {
+        console.log(err);
+        $('#make-profile').one('click', function (e) {
+          setProfileImage();
+        })
+      }
+    })
+  }
+
+  $('#make-profile').one('click', function () {
+    setProfileImage();
+  })
 
 
   var renderNoResults = function ($container, text, link, linkText) {
@@ -64,6 +92,19 @@ var initPage = function (key) {
   $('.login-input').on('focusout', function (e) {
     $(e.target).parent().children('label').children('.input-info').hide();
   });
+
+  var setProfileLink = function () {
+    var profImgSrc = $('.profile-img').attr('src');
+    var plixId;
+    var userId = $('.follow-button').attr('data-follow-id');
+    if (profImgSrc && !profImgSrc.includes('defaultprofile')) {
+      plixId = profImgSrc.split('thumb-')[1].split('-')[1].split('.')[0];
+      $('.profile-link').attr('href', `/plix/${userId}/${plixId}`);
+    }
+  }
+
+  setProfileLink();
+
 
 
 
