@@ -200,6 +200,7 @@ form h1 {
   height: 40px;
   margin-top: 10px;
   text-decoration: none;
+  text-align: center;
 }
 
 .login-button:hover {

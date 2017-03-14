@@ -14,38 +14,39 @@ $(window).resize(function (e) {
 
 
 plixUpload.validate = function (input) {
-    var Rotation = function (orientation) {
+    var Rotation = function (orientation, ios) {
+
       switch (orientation) {
       case 2:
-        this.rotation = 0;
+        this.rotation = ios ? 270 : 0;
         this.flip = 180;
         break;
       case 3:
-        this.rotation = 180;
+        this.rotation = ios ? 90 : 180;
         this.flip = 0;
         break;
       case 4:
-        this.rotation = 180;
+        this.rotation = ios ? 90 : 180;
         this.flip = 180
         break;
       case 5:
-        this.rotation = 90;
+        this.rotation = ios ? 0 : 90;
         this.flip = 180;
         break;
       case 6:
-        this.rotation = 90;
+        this.rotation = ios ? 0 : 90;
         this.flip = 0;
         break;
       case 7:
-        this.rotation = 270;
+        this.rotation = ios ? 180 : 270;
         this.flip = 180;
         break;
       case 8:
-        this.rotation = 270;
+        this.rotation = ios ? 180 : 270;
         this.flip = 0;
         break;
       default:
-        this.rotation = 0;
+        this.rotation = ios ? 270 : 0;
         this.flip = 0;
       }
 
@@ -60,7 +61,9 @@ plixUpload.validate = function (input) {
     if (input.files && input.files[0]) {
       getOrientation(input.files[0], function (orientation) {
         console.log('orientation: ' + orientation);
-        imageRotation = new Rotation(orientation);
+        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        alert(iOS);
+        imageRotation = new Rotation(orientation, iOS);
 
         var reader = new FileReader();
         console.log('Has Files');
