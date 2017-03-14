@@ -66,7 +66,7 @@ plixUpload.validate = function (input) {
 
   if (input.files && input.files[0]) {
     getOrientation(input.files[0], function (orientation) {
-      //alert('orientation: ' + orientation);
+      alert('orientation: ' + orientation);
       imageRotation = new Rotation(orientation);
 
       var reader = new FileReader();
