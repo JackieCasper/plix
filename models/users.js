@@ -91,7 +91,7 @@ User.findFollowing = (name, following) => {
 
 
 User.getFeed = (id, page) => {
-  return db.manyOrNone('SELECT users.name AS username, plix.img AS image, plix.location_id, plix.id, locations.address FROM users AS users JOIN user_follows ON user_follows.follow_id = users.id JOIN plix ON plix.user_id = users.id JOIN locations ON locations.id = plix.location_id WHERE user_follows.user_id = $1 ORDER BY plix.plix_date LIMIT 24 OFFSET $2', [id, page * 24]);
+  return db.manyOrNone('SELECT users.name AS username, plix.img AS image, plix.location_id, plix.id, locations.address FROM users AS users JOIN user_follows ON user_follows.follow_id = users.id JOIN plix ON plix.user_id = users.id JOIN locations ON locations.id = plix.location_id WHERE user_follows.user_id = $1 ORDER BY plix.plix_date DESC LIMIT 24 OFFSET $2', [id, page * 24]);
 }
 
 User.search = (keyword) => {
