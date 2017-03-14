@@ -2,14 +2,13 @@
 
 var plixUpload = {};
 var imageRotation = false;
-var labelWidth = $('.upload-label').width();
+
 
 $(window).resize(function (e) {
   if (imageRotation && (imageRotation.rotation === 90 || imageRotation.rotation === 270)) {
-    $('.upload-img').css({
-      height: labelWidth + 'px',
-      width: 'auto'
-    });
+    $('.upload-img')
+      .height($(window).innerWidth() <= 900 ? $(window).innerWidth() : 900)
+      .width('auto');
   }
 })
 
@@ -53,13 +52,7 @@ plixUpload.validate = function (input) {
     $('.upload-img').css({
       transform: `rotate(${this.rotation}deg)rotateX(${this.flip}deg)`
     })
-    if (this.rotation === 270 || this.rotation === 90) {
-      $('.upload-img')
-        .height(labelWidth)
-        .css({
-          width: 'auto'
-        });
-    }
+
   }
 
 
@@ -74,6 +67,11 @@ plixUpload.validate = function (input) {
 
       reader.onload = function (e) {
         $('.upload-img').attr('src', e.target.result);
+        if (imageRotation.rotation === 270 || imageRotation.rotation === 90) {
+          $('.upload-img')
+            .height($(window).innerWidth() <= 900 ? $(window).innerWidth() : 900)
+            .width('auto');
+        }
       }
 
       reader.readAsDataURL(input.files[0]);
