@@ -96,20 +96,30 @@ controller.showProfile = (req, res) => {
     .catch(err => console.log('ERROR GETTING USER', err));
 }
 
-controller.test = (req, res, next) => {
-  console.log('test');
-  console.log(req.body);
-  next();
-}
+// used when setting up different body parsers. 
+// just logs the body
+//controller.test = (req, res, next) => {
+//  console.log('test');
+//  console.log(req.body);
+//  next();
+//}
 
+
+// to show a user's profile - not the viewer's
 controller.showUser = (req, res) => {
+  // get the name of the profile user
   const name = req.params.name;
+
+  // if its the viewer's profile, redirect
   if (name === req.user.name) {
     res.redirect('/user/profile');
-  } else {
+
+  } else { // if its not the viewer's profile
     Users
+    // get promise to get plix by username
       .findPlixByName(name)
       .then(plix => {
+        // start setting up render data
         const renderData = {
           name: name,
           userId: req.user.id,
@@ -117,29 +127,33 @@ controller.showUser = (req, res) => {
           plix: plix[1],
         }
         Users
+        // get promise to get the follow count
           .getFollowCount(plix[0].id)
           .then(followCount => {
+            // set the follow count in the render data
             renderData.followingCount = followCount[0].following_count || 0;
             renderData.followerCount = followCount[1].follower_count || 0;
             Users
+            // get promise to get if the viewer is following the user
               .getFollowing(parseInt(req.user.id), parseInt(plix[0].id))
               .then(following => {
-                console.log(following);
-                if (following) {
+
+                if (following) { // they are following
+                  // set render data
                   renderData.follow = {
                     class: 'following',
                     followid: plix[0].id
                   };
-                } else {
+                } else { // they aren't following
+                  // set the render data
                   renderData.follow = {
                     class: '',
                     followid: plix[0].id
                   };
                 }
-                console.log('--------------------------');
-                console.log('GOT USER');
-                console.log(renderData);
+                // render the page
                 res.render('users/show', renderData);
+                // catch all the errors
               })
               .catch(err => console.log(err));
           })
@@ -148,23 +162,23 @@ controller.showUser = (req, res) => {
           });
       })
       .catch(err => {
-        console.log('----------------------------');
-        console.log('ERROR GETTING USER');
         console.log(err);
       });
   }
-
 }
 
-
+// to show who is following
 controller.showFollowing = (req, res) => {
+  // get if viewing following users or followers
   const follow = req.params.following;
+  // set up return data
   const returnData = {
     name: req.params.name,
     userId: req.user.id,
     followClass: req.params.following
   }
   Users
+  //get promise to find 
     .findFollowing(req.params.name, follow)
     .then(followData => {
       returnData.following = followData[0];
