@@ -178,74 +178,84 @@ controller.showFollowing = (req, res) => {
     followClass: req.params.following
   }
   Users
-  //get promise to find 
+  //get promise to find following / followers
     .findFollowing(req.params.name, follow)
     .then(followData => {
+      // add to return data
       returnData.following = followData[0];
-      console.log('FOLLOWER DATA', followData);
-      Users
+
+      Users // get promise for follow count
         .getFollowCount(followData[1].id)
         .then(followCount => {
+          // add follow count to return data
           returnData.followingCount = followCount[0].following_count || 0;
           returnData.followerCount = followCount[1].follower_count || 0;
-          console.log('FOLLOWER COUNT', followCount);
+          // if the user isn't the viewer
           if (req.user.id !== followData[1].id) {
+            // see if the viewer is following the user
             Users
               .getFollowing(req.user.id, followData[1].id)
               .then(following => {
-                if (following) {
+                if (following) { // if the viewer is following the user
+                  // add to return data
                   returnData.follow = {
                     class: 'following',
                     followid: followData[1].id
                   };
-                } else {
+                } else { // if the viewer isn't following the user
+                  // add to return data
                   returnData.follow = {
                     class: '',
                     followid: followData[1].id
                   };
                 }
+                // render
                 res.render('users/showfollowing', returnData);
               })
               .catch(err => console.log(err));
-          } else {
+          } else { // if the user is the viewer
+            // add to the return data
             returnData.follow = {
-              class: 'nofollow',
-              followid: 0
-            }
+                class: 'nofollow',
+                followid: 0
+              }
+              // render
             res.render('users/showfollowing', returnData);
           }
-
-
-        })
+        }) //catch errors
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
 }
 
+// show the viewer's feed
 controller.showFeed = (req, res) => {
+  // get the user's name
   const renderData = {
-    name: req.user.name
-  }
+      name: req.user.name
+    }
+    // and id
   const userId = req.user.id;
-  Users
+  Users // get the follow count
     .getFollowCount(userId)
     .then(followCount => {
+      // add to render data
       renderData.followingCount = followCount[0].following_count || 0;
       renderData.followerCount = followCount[1].follower_count || 0;
-      Users
+      Users // get feed
         .getFeed(userId, 0)
         .then(plix => {
-          console.log('PLIX ARRAY---------------', plix);
+          // add to render data
           renderData.plix = plix;
-          console.log('renderData ---> ', renderData);
+          // render
           res.render('users/feed', renderData);
         })
         .catch(err => console.log(err));
-
     })
     .catch(err => console.log(err));
 }
 
+// render the page to search users
 controller.findUsers = (req, res) => {
   res.render('users/search');
 }

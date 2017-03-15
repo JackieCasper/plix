@@ -1,13 +1,20 @@
-const bcrypt = require('bcrypt');
+/////////////////////////////////////////////////////
+// IMAGES MODEL
+/////////////////////////////////////////////////////
 
 const db = require('../config/db');
+// aws requirements
 const aws = require('aws-sdk');
 const S3 = new aws.S3();
-const Sharp = require('sharp');
 const BUCKET = process.env.S3_BUCKET;
+
+// sharp - image editing
+// http://sharp.dimens.io/en/stable/
+const Sharp = require('sharp');
 
 const Images = {};
 
+// upload image to AWS
 Images.uploadAWS = (fileKey, fileType, data) => {
   return S3.putObject({
     Body: data,
@@ -17,6 +24,7 @@ Images.uploadAWS = (fileKey, fileType, data) => {
   }).promise()
 }
 
+// size an image to the inputted width and height
 Images.sizeImage = (data, width, height) => {
   return Sharp(data)
     .resize(width, height, {
@@ -25,14 +33,15 @@ Images.sizeImage = (data, width, height) => {
     .toBuffer()
 }
 
+// rotate to EXIF Orientation
 Images.rotateImage = (data) => {
   return Sharp(data)
     .rotate()
     .toBuffer()
 }
 
+// create thumb of image and upload to aws
 Images.createThumb = (data, fileKey, fileType, width, height) => {
-  console.log('CREATING THUMB---IN MODEL');
   return Images
     .sizeImage(data, width, height)
     .then(function (buffer) {
@@ -41,4 +50,5 @@ Images.createThumb = (data, fileKey, fileType, width, height) => {
     })
 }
 
+// export
 module.exports = Images;

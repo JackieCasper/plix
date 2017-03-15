@@ -95,6 +95,8 @@ DATABASE_URL=postgres://YOUR_USERNAME@localhost:5432/plix
 
 AWS_ROOT_URL=YOUR_AWS_ROOT_URL```
 
+uncomment lines 1 & 2 in app.js
+
 run ```node app.js``` in the terminal
 
 go to localhost:3000 in your browser
