@@ -1,3 +1,7 @@
+/////////////////////////////////////////////////////////////////////
+// SIGNUP JS - handles validation for signup -- currently not in use
+/////////////////////////////////////////////////////////////////////
+
 //$(document).ready(function () {
 //  $('form').submit(function (e) {
 //    e.preventDefault();
@@ -20,16 +24,16 @@
 //  })
 
 //  const replaceSpaces = function ($input) {
-    //    $($input).val($input.val().replace(/\s/g, ''));
-    //  }
-    //
-    //  $("#name")
-    //    .keyup(function (e) {
-    //      replaceSpaces($(e.target));
-    //    })
-    //    .change(function (e) {
-    //      replaceSpaces($(e.target));
-    //    })
+//    $($input).val($input.val().replace(/\s/g, ''));
+//  }
+//
+//  $("#name")
+//    .keyup(function (e) {
+//      replaceSpaces($(e.target));
+//    })
+//    .change(function (e) {
+//      replaceSpaces($(e.target));
+//    })
 
 
 //});// end of document ready

@@ -1,61 +1,74 @@
+/////////////////////////////////////////////////////
+// USER CONTROLLER
+/////////////////////////////////////////////////////
+
+// get model
 const Users = require('../../models/users');
+
+// pasport to handle local login and local sign up
 const passport = require('passport');
-const AuthService = require('../../services/auth');
+
 // set up the controller
 const controller = {};
 
+// to show the login page
 controller.showLogin = (req, res) => {
-
+  // get error if any
   let sendData = req.flash().error || {};
   if (sendData[0]) {
     sendData = {
       error: sendData[0]
     };
   }
-
-
-  console.log(sendData);
+  // render page with error if any
   res.render('users/login', sendData);
 }
 
+// handle login
 controller.login = passport.authenticate(
   'local-login', {
-    failureRedirect: '/user/login',
-    successRedirect: '/user/feed',
-    failureFlash: true
+    failureRedirect: '/user/login', // if it fails, redirect to login
+    successRedirect: '/user/feed', // if it succeeds go to feed
+    failureFlash: true // use flash
   }
 );
 
-controller.showNew = (req, res) => {
-  let sendData = req.flash().error || {};
-  if (sendData[0]) {
-    sendData = {
-      error: sendData[0]
-    };
-  }
-  res.render('users/signup', sendData);
-}
+// to show the signup page
+//controller.showNew = (req, res) => {
+//  let sendData = req.flash().error || {};
+//  if (sendData[0]) {
+//    sendData = {
+//      error: sendData[0]
+//    };
+//  }
+//  res.render('users/signup', sendData);
+//}
 
+// handle signup
 controller.new = passport.authenticate(
   'local-signup', {
-    failureRedirect: '/',
-    successRedirect: '/user/feed',
-    failureFlash: true
+    failureRedirect: '/', // if it fails, redirect to home
+    successRedirect: '/user/feed', // if it succeeds go to feed
+    failureFlash: true // use flash
   }
 );
 
-
+// handle logout - log out and redirect
 controller.logout = (req, res) => {
   req.logout();
   res.redirect('/');
 }
 
+// to show a user's profile
 controller.showProfile = (req, res) => {
+  // get the name
   const name = req.user.name;
+
+  // get promise to find plix by name
   Users
     .findPlixByName(name)
     .then(data => {
-      console.log(data);
+      // start building data object - name, photo, plix, user id, follow
       const renderData = {
         name: name,
         photo: req.user.profile_img,
@@ -66,12 +79,15 @@ controller.showProfile = (req, res) => {
           followid: 0
         },
       };
+
+      // get promise to get follow count
       Users
         .getFollowCount(req.user.id)
         .then(followCount => {
-          console.log(followCount);
+          // set follow count in render data
           renderData.followingCount = followCount[0].following_count || 0;
           renderData.followerCount = followCount[1].follower_count || 0;
+          // render page
           res.render('users/show', renderData);
         })
         .catch(err => console.log(err));

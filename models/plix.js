@@ -1,5 +1,8 @@
-const bcrypt = require('bcrypt');
+/////////////////////////////////////////////////////
+// PLIX MODEL
+/////////////////////////////////////////////////////
 
+const bcrypt = require('bcrypt');
 const db = require('../config/db');
 const aws = require('aws-sdk');
 const S3 = new aws.S3();

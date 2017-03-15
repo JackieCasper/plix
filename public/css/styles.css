@@ -583,6 +583,7 @@ a>h1 {
   background-repeat: no-repeat;
   background-size: cover;
   max-width: 298px;
+  margin: 1px;
   width: 50%;
 }
 

@@ -1,9 +1,21 @@
+/////////////////////////////////////////////////////
+// Router for API
+/////////////////////////////////////////////////////
+
 // set up router
 const router = require('express').Router();
-const AuthService = require('../../services/auth');
 
+// set up routes
+
+// users
 router.use('/users/', require('./users/'));
+
+// locations
 router.use('/locations/', require('./locations/'));
+
+// plix
 router.use('/plix/', require('./plix/'));
 
+
+// export
 module.exports = router;

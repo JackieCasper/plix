@@ -1,9 +1,14 @@
+/////////////////////////////////////////////////////
+// USER MODEL
+/////////////////////////////////////////////////////
+
 const bcrypt = require('bcrypt');
-
 const db = require('../config/db');
-
-
 const User = {};
+
+
+
+
 
 User.findByEmail = (email) => {
   return db.oneOrNone('SELECT * FROM users WHERE email = $1', [email.toUpperCase()]);

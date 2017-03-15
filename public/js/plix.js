@@ -1,3 +1,7 @@
+/////////////////////////////////////////////////////
+// FRONT END PLIX JS - helps get and render plix
+/////////////////////////////////////////////////////
+
 var Plix = {};
 
 var renderNoResults = function ($container, text, link, linkText) {
