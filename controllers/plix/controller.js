@@ -27,34 +27,46 @@ controller.show = (req, res) => {
   Plix
     .findById(id)
     .then(data => {
-      // if it is the viewer's plix
-      if (thisUsername === plixUsername) {
-        // render the page for the viewer
-        const renderData = {
-          plix: data,
-          key: process.env.PLACES_KEY,
-          profileClass: '',
-          profileText: 'Make Profile Image'
-        }
+      // Plix
+      //   .findComments(id)
+      //   .then(comments=>{
+          // if it is the viewer's plix
+          if (thisUsername === plixUsername) {
+            // render the page for the viewer
+            const renderData = {
+              plix: data,
+              key: process.env.PLACES_KEY,
+              profileClass: '',
+              profileText: 'Make Profile Image',
+              // comments: comments,
+              // commentsLength: comments.length,
+              // username: req.user.name,
+              // userImg: req.user.profile_img
+            }
 
-        // if it is the user's profile picture
-        if (data.thumb === req.user.profile_img) {
-          // set profile picture data
-          renderData.profileClass = 'is-profile';
-          renderData.profileText = 'Profile Image';
-        }
+            // if it is the user's profile picture
+            if (data.thumb === req.user.profile_img) {
+              // set profile picture data
+              renderData.profileClass = 'is-profile';
+              renderData.profileText = 'Profile Image';
+            }
 
-        // render the page
-        res.render('plix/show-user', renderData)
-          // if its not the viewer's plix
-      } else {
-        // render the page
-        res.render('plix/show', {
-          plix: data,
-          key: process.env.PLACES_KEY,
-        });
-      }
-
+            // render the page
+            res.render('plix/show-user', renderData)
+              // if its not the viewer's plix
+          } else {
+            // render the page
+            res.render('plix/show', {
+              plix: data,
+              key: process.env.PLACES_KEY,
+              // comments: comments,
+              // commentsLength: comments.length,
+              // username: req.user.name,
+              // userImg: req.user.profile_img
+            });
+          }
+        // })
+        // .catch(err=>console.log(err));
     })
     .catch(err => {
       console.log(err);
@@ -74,8 +86,8 @@ controller.new = (req, res) => {
 // to create a plix
 controller.createPlix = (userId, location, description, imageType, imageData, req, res) => {
   // start of the image url
-  const url = 'https://s3.amazonaws.com/jackiecasper-plix/';
-  // create the plix without the images first, 
+  const url = process.env.AWS_ROOT_URL || 'https: //s3.amazonaws.com/jackiecasper-plix/';
+  // create the plix without the images first,
   Plix
     .create(userId, location, description)
     //getting the plix id back
@@ -124,7 +136,7 @@ controller.createPlix = (userId, location, description, imageType, imageData, re
 
 }
 
-// create new first step - mostly dealing with location stuff, 
+// create new first step - mostly dealing with location stuff,
 // also getting the image data
 controller.createNew = (req, res) => {
   // get the user id, location, image data, image type, and description

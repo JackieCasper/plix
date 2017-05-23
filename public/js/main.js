@@ -4,6 +4,16 @@
 
 // init the page using the api key
 var initPage = function (key) {
+  var texts = ['Exploring', 'Sharing', 'Connecting'];
+  var currentText = 0;
+  var $feedContainer = $('.show-feed-container');
+  var $plixContainer = $('.plix-container');
+  var $followContainer = $('.follow-container');
+  var $followList = $('.following-list');
+  var $feeds = $('.feed-plix');
+  var $plixItem = $('.plix-list-item');
+  var $plixShowImg = $('.plix-show-img');
+  var description = $('.show-description-edit').val();
 
   // if there is a map
   if (typeof map != 'undefined' && typeof google != 'undefined') {
@@ -19,9 +29,7 @@ var initPage = function (key) {
 
   //Landing page rotate text
   //===================================
-  // define the texts
-  var texts = ['Exploring', 'Sharing', 'Connecting'];
-  var currentText = 0;
+
   // function to get the next in the list or the first if its the last
   var getNextText = function () {
       currentText = currentText + 1 === texts.length ? 0 : currentText + 1;
@@ -83,38 +91,40 @@ var initPage = function (key) {
 
   // function to set a profile image
   var setProfileImage = function () {
-      // get user name and thumb of the current plix
-      var username = $('#username').attr('data-name');
-      var thumb = $('.plix-show-img').attr('data-thumb');
-      // do ajax
-      $.ajax({
-        url: `/api/users/${username}/setprofile`,
-        type: 'POST',
-        data: {
-          img: thumb
-        },
-        // on success
-        success: function (res) {
-          // change the make profile button
-          $('#make-profile')
-            .addClass('is-profile')
-            .text('Profile Image');
-        },
-        error: function (err) {
-          console.log(err);
-          // add the event listener again
-          $('#make-profile').one('click', function (e) {
-            setProfileImage();
-          })
-        }
-      })
-    }
-    // event listener to make profile picture
+    // get user name and thumb of the current plix
+    var username = $('#username').attr('data-name');
+    var thumb = $('.plix-show-img').attr('data-thumb');
+    // do ajax
+    $.ajax({
+      url: `/api/users/${username}/setprofile`,
+      type: 'POST',
+      data: {
+        img: thumb
+      },
+      // on success
+      success: function (res) {
+        // change the make profile button
+        $('#make-profile')
+          .addClass('is-profile')
+          .text('Profile Image');
+      },
+      error: function (err) {
+        console.log(err);
+        // add the event listener again
+        $('#make-profile').one('click', function (e) {
+          setProfileImage();
+        })
+      }
+    })
+  }
+
+  // event listener to make profile picture
   $('#make-profile').one('click', function () {
     setProfileImage();
   })
 
-  // function to render an informative message when there is nothing to display
+  // Rendering an informative message when there is nothing to display
+  //===================================================================
   var renderNoResults = function ($container, text, link, linkText) {
     // create container
     var $noContainer = $('<div>', {
@@ -145,28 +155,30 @@ var initPage = function (key) {
       .appendTo($noContainer);
   }
 
-
-
-  //
-  var $feedContainer = $('.show-feed-container');
+  // if there is nothing in the feed
   if ($feedContainer.children().length === 0) {
     renderNoResults($feedContainer, 'No one has shared anything.', '/user/find', 'Follow more people.');
   }
 
-  var $plixContainer = $('.plix-container');
+  // if there is nothing in a plix container 
   if ($plixContainer.children().length === 0 && !window.location.pathname.includes('locations')) {
+    // if its the user's profile
     if (window.location.pathname.includes('profile')) {
       renderNoResults($plixContainer, `You have no Plix.`, '/plix/new', 'Share one now.');
-    } else {
-      var name = $('#username').attr('data-username');
+    } else { // if its a different user
+      var name = $('#user').text();
       renderNoResults($plixContainer, `${name} has no plix.`, '/user/feed', 'Find out what others are up to.')
     }
   }
-  var $followButton = $('.follow-button');
 
+  //=====================================================
+  // End of no results section
+
+
+  //Handle stuff for following
+  //=======================================================
+  // if its the viewer's page, the follow button will have a class of no follow
   $('.nofollow').parent().remove();
-  var $followContainer = $('.follow-container');
-  var $followList = $('.following-list');
   if ($followList.children().length === 0) {
     if ($followContainer.hasClass('following')) {
       renderNoResults($followList, `You're not following anyone.`, '/user/find', 'Find more people');
@@ -174,40 +186,6 @@ var initPage = function (key) {
       renderNoResults($followList, `No one is following you.`);
     }
   }
-
-
-  // set the feed height to the width
-  var $feeds = $('.feed-plix');
-  $feeds.height($feeds.width());
-  $('.feed-info-container>.feed-plix').remove();
-  var $plixItem = $('.plix-list-item');
-  $plixItem.height($plixItem.width());
-  $(window).resize(function () {
-    $plixItem = $('.plix-list-item');
-    $plixItem.height($plixItem.width());
-    $feeds.height($feeds.width());
-  })
-
-  // validate plix upload image
-  $('#plix-img').change(function () {
-    plixUpload.validate(this);
-  });
-  // check description on key up
-  $('.plix-description').keyup(function () {
-    plixUpload.descriptionCheck();
-  });
-
-  // set the show image of the plix to the right size
-  var $plixShowImg = $('.plix-show-img');
-  $plixShowImg.one('load', function () {
-    if ($plixShowImg.width() > $plixShowImg.height()) {
-      $('.plix-img-container').height($plixShowImg.height());
-    }
-  }).each(function () {
-    if (this.complete) {
-      $(this).load();
-    }
-  });
 
   // add click listener to follow
   var addFollowClick = function () {
@@ -238,8 +216,45 @@ var initPage = function (key) {
   addFollowClick();
 
 
+  // set the feed height to the width
+  $feeds.height($feeds.width());
+  $('.feed-info-container>.feed-plix').remove();
 
-  var description = $('.show-description-edit').val();
+
+
+  $plixItem.height($plixItem.width());
+  $(window).resize(function () {
+    $plixItem = $('.plix-list-item');
+    $plixItem.height($plixItem.width());
+    $feeds.height($feeds.width());
+  })
+
+  // validate plix upload image
+  $('#plix-img').change(function () {
+    plixUpload.validate(this);
+  });
+  // check description on key up
+  $('.plix-description').keyup(function () {
+    plixUpload.descriptionCheck();
+  });
+
+
+  // set the show image of the plix to the right size
+  $plixShowImg.one('load', function () {
+    if ($plixShowImg.width() > $plixShowImg.height()) {
+      $('.plix-img-container').height($plixShowImg.height());
+    }
+  }).each(function () {
+    if (this.complete) {
+      $(this).load();
+    }
+  });
+
+
+
+
+
+
   $('.edit-icon').click(function (e) {
     var $textarea = $('.show-description-edit');
     $('.edit-icons')

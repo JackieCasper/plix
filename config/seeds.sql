@@ -36,3 +36,10 @@ CREATE TABLE plix (
   plix_date TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+-- CREATE TABLE plix_comments (
+--   id BIGSERIAL PRIMARY KEY,
+--   user_id INT REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+--   plix_id INT REFERENCES plix(id) ON DELETE CASCADE NOT NULL,
+--   comment VARCHAR(255) NOT NULL,
+--   comment_date TIMESTAMP NOT NULL DEFAULT NOW()
+-- );

@@ -284,28 +284,29 @@ map.clearMarkers = function () {
 }
 
 map.setLocation = function (location, name, placeId) {
-    console.log('setting location');
-    map.search.$searchInput.val(name);
-    map.map.setCenter({
+  console.log('setting location');
+  map.search.$searchInput.val(name);
+  map.map.setCenter({
+    lat: location.lat,
+    lng: location.lng
+  });
+
+  map.markers.push(new google.maps.Marker({
+    map: map.map,
+    title: name,
+    position: {
       lat: location.lat,
       lng: location.lng
-    });
-
-    map.markers.push(new google.maps.Marker({
-      map: map.map,
-      title: name,
-      position: {
-        lat: location.lat,
-        lng: location.lng
-      }
-    }));
-    if ($('.plix-form').length) {
-
-      $('#place-id').val(placeId)
     }
+  }));
+  if ($('.plix-form').length) {
 
+    $('#place-id').val(placeId)
   }
-  //http://jsfiddle.net/s6Dyp/18/
+
+}
+
+//http://jsfiddle.net/s6Dyp/18/
 map.setStaticSrc = function (lat, lng, key) {
   console.log(lat, lng, key);
   var src = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&zoom=16&center=${lat},${lng}&format=png&markers=color:red%7C${lat},${lng}&key=${key}&style=feature:administrative|element:labels.text.fill|color:0x444444&style=feature:landscape|element:all|color:0xf2f2f2&style=feature:landscape|element:geometry.fill|hue:0x00ffd6|saturation:11|weight:1.00|lightness:-4&style=feature:landscape.man_made|element:geometry.fill|lightness:0&style=feature:poi|element:all|visibility:off&style=feature:poi.park|element:geometry.fill|visibility:on|hue:0x00ffb2&style=feature:road|element:all|saturation:-100|lightness:45&style=feature:road.highway|element:all|visibility:simplified&style=feature:road.arterial|element:labels.icon|visibility:off&style=feature:transit|element:all|visibility:off&style=feature:water|element:all|color:0x54babe|visibility:on&style=feature:water|element:geometry.fill|saturation:-19|lightness:12`

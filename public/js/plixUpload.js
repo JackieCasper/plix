@@ -19,7 +19,6 @@ $(window).resize(function (e) {
 
 plixUpload.validate = function (input) {
     var Rotation = function (orientation, ios) {
-
       switch (orientation) {
       case 2:
         this.rotation = ios ? 270 : 0;
